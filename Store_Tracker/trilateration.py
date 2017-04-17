@@ -1,4 +1,4 @@
-# Note: the following is a modifier version of
+# Note: the following is a modified version of
 # https://github.com/noomrevlis/trilateration/blob/master/trilateration2D.py
 
 from __future__ import division
