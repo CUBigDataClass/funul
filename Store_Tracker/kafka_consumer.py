@@ -1,7 +1,8 @@
 from kafka import KafkaConsumer
-import datetime
+import time
 import statistics
 import json
+import trilateration
 
 SERVERS = ['localhost:9092'] # kafka server list
 TOPIC = 'bluetooth_readings' # topic to be used for all trilateration procedures
@@ -26,7 +27,7 @@ for msg in consumer:
     # append rssi reading to list if list for pi id exists, otherwise create one
     if data['pi_id'] in readings:
         readings[data['pi_id']].append(data['rssi_reading'])
-    else
+    else:
         readings[data['pi_id']] = [data['rssi_reading']]
 
     # do actual processing after every time window elapses
