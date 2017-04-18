@@ -50,6 +50,8 @@ void setup()
 
   nano.setReadPower(500); //5.00 dBm. Higher values may cause USB port to brown out
   //Max Read TX Power is 27.00 dBm and may cause temperature-limit throttling
+    Serial.println("... Done Initializing");
+
 }
 //inserts new_EPC_arr into EPCS_arrarr if new_EPC_arr does not exist returns true if inserted false if not inserted
 boolean insert_into_array_if_unq(int cur_number_of_EPC) {
@@ -73,12 +75,12 @@ boolean insert_into_array_if_unq(int cur_number_of_EPC) {
 
 void loop()
 {
-  Serial.read(); //Throw away the user's character
+  //Serial.read(); //Throw away the user's character
 
   int number_of_unq_EPC = 0;
   byte EPClength = myEPClength;
   byte responseType = 0;
-  Serial.print("Starting Scan");
+  Serial.println("Starting Scan");
   while (0 != RESPONSE_SUCCESS)//RESPONSE_IS_TAGFOUND)
   {
     myEPClength = sizeof(new_ECP_arr); //Length of EPC is modified each time .readTagEPC is called
