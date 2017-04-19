@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    kafka_instance_ids:
+      - 'i-091ba98eddff1fa3b'
+    aws_region: us-east-2
+  tasks:
+    - name: make aws key variables accessible
+      include_vars: aws_keys.yaml
+    - name: ensure ec2 instances are running
+      ec2:
+        instance_ids: '{{ kafka_instance_ids }}'
+        region: '{{ aws_region }}'
+        state: running
+        count: 1
+        aws_access_key: '{{ aws_access_key }}'
+        aws_secret_key: '{{ aws_secret_key }}'
+...
