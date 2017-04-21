@@ -15,7 +15,7 @@ db = couch['local_ip']
 localIP = check_output(['hostname', '-I'])
 localIP = localIP.rstrip()
 
-doc = {'piLocalIP': localIP}
+doc = {'piLocalIP': localIP, 'pi_id': pi_id}
 db.save(doc)
 print doc
 
