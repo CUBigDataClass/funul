@@ -38,7 +38,10 @@ while True:
 	for beacon in returnedList:
 		mac = beacon.split(",")[0]
 		if mac == "0c:f3:ee:00:eb:ea":
-			doc = {'ble_data': beacon, 'pi_id': pi_id}
+			RSSI = beacon.split(",")[5]
+			TX_power = beacon.split(",")[4]
+			doc = {'pi_id': pi_id, 'MAC': mac, 'TX_power': TX_power, 'RSSI':RSSI}
+			#doc = {'ble_data': beacon, 'pi_id': pi_id}
 			db.save(doc)
 			print doc
 			#print beacon
