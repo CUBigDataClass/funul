@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Phat-Stax</title>
+    <title>funul.io</title>
 
     <!-- Custom styles for this template -->
     <link href="style.css" rel="stylesheet">
@@ -12,31 +12,29 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+    <!-- d3 -->
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   </head>
 
   <body>
 
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-color fixed-top">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">Home</a>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-color fixed-top">
+
+      <a class="navbar-brand" href="#">
+          <img src="Funul.png" class="d-inline-block align-top header-logo" alt="funul">
+      </a>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault" style="margin-top:20px">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="#">About</a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="#">Heat Map</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+            <a class="nav-link" href="#heatmap">Heat Map</a>
           </li>
         </ul>
 
@@ -44,16 +42,14 @@
     </nav>
 
     <div class="container">
-
       <div class="starter-template">
-        <h1>Phat-Stax</h1>
+        <h1>funul.io</h1>
         <p class="lead">Trianglation of Bluetooth Divices</p>
       </div>
       <div class="text-center">
        <img src="tech_diagram.jpg">
       </div>
-
-    </div><!-- /.container -->
+    </div>
 
 
     <!-- Bootstrap core JavaScript
