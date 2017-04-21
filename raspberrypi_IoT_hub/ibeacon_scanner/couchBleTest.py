@@ -7,7 +7,7 @@ import sys
 import bluetooth._bluetooth as bluez
 
 couch = couchdb.Server() #default/empty is localhost
-db = couch['books']
+db = couch['ble']
 
 dev_id = 0
 try:
