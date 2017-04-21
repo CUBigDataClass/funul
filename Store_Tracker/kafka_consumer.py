@@ -7,28 +7,33 @@ import trilateration
 SERVERS = ['localhost:9092'] # kafka server list
 TOPIC = 'bluetooth_readings' # topic to be used for all trilateration procedures
 GROUP_ID = 'test_group'
-TIME_WINDOW = 3 # in seconds
+TIME_WINDOW = 5 # in seconds
+TX_POWER = -65 # power received by receiver at distance of 1m
 
 
 # start new reading every 3 seconds
 last_window_timestamp = time.time()
 readings = {}
-tx_powers = {}
-pi_locations = {}
+pi_locations = {
+    'pi_1': trilateration.point(0,0),
+    'pi_2': trilateration.point(10,0),
+    'pi_3': trilateration.point(0,10),
+    'pi_4': trilateration.point(10,10)
+}
 
 consumer = KafkaConsumer(TOPIC, bootstrap_servers=SERVERS, auto_offset_reset='earliest', group_id=GROUP_ID)
 for msg in consumer:
     data = json.loads(msg[6])
-
-    # write pi-specific properties to dictionary, overwriting if necessary
-    tx_powers[data['pi_id']] = data['tx_powers']
-    pi_locations[data['pi_id']] = data['pi_locations']
 
     # append rssi reading to list if list for pi id exists, otherwise create one
     if data['pi_id'] in readings:
         readings[data['pi_id']].append(data['rssi_reading'])
     else:
         readings[data['pi_id']] = [data['rssi_reading']]
+     
+    # throw out data if it's from before processing window
+    if data['timestamp'] < last_window_timestamp:
+        continue
 
     # do actual processing after every time window elapses
     if data['timestamp'] - last_window_timestamp >= TIME_WINDOW:
@@ -45,6 +50,9 @@ for msg in consumer:
         median_distances.sort(key=lambda x: x[1])
 
         # use trilateration on three pis with smallest median distances
+        if len(median_distances) < 3:
+            continue
+
         circle_list = [
             trilateration.circle(pi_locations[median_distances[0][0]], median_distances[0][1]),
             trilateration.circle(pi_locations[median_distances[1][0]], median_distances[1][1]),
