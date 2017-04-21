@@ -19,6 +19,6 @@ for change in db.changes(feed='continuous'):
     producer.send(TOPIC, value=json.dumps({
         'pi_id': doc['pi_id'],
         'rssi_reading': doc['rssi_reading'],
-        'timestamp': doc['timestamp']}), key='BLUETOOTH1')
+        'timestamp': doc['timestamp']}), key=doc['device_id'])
 
 producer.close()

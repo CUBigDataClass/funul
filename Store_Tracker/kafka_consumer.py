@@ -28,6 +28,10 @@ pi_locations = {
     'pi_4': trilateration.point(10,10)
 }
 
+# processed data will be added to separate database
+server = couchdb.client.Server(COUCHDB_SERVER)
+db = server['processed_ble']
+
 consumer = KafkaConsumer(TOPIC, bootstrap_servers=SERVERS, auto_offset_reset='earliest', group_id=GROUP_ID)
 for msg in consumer:
     data = json.loads(msg[6])
@@ -44,6 +48,7 @@ for msg in consumer:
 
     # do actual processing after every time window elapses
     if data['timestamp'] - last_window_timestamp >= TIME_WINDOW:
+        last_window_timestamp = data['timestamp']
         median_distances = []
         for pi_id in readings:
             distances = []
@@ -66,7 +71,14 @@ for msg in consumer:
             trilateration.circle(pi_locations[median_distances[2][0]], median_distances[2][1])]
         computed_location = trilateration.do_trilateration(circle_list)
 
-        server = couchdb.client.Server(COUCHDB_SERVER)
+
+        # add processed data to database
+        new_doc = couchdb.client.Document
+        db.update([Document(
+            location_x=computed_location.x,
+            location_y=computed_location.y,
+            device_id=msg.key,
+            timestamp=last_window_timestamp)])
 
         print(computed_location.x, computed_location.y)
 
