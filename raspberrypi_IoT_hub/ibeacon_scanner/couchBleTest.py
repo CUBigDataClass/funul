@@ -5,10 +5,21 @@ import couchdb
 import blescan
 import sys
 import bluetooth._bluetooth as bluez
+from subprocess import check_output
+
+pi_id = "pi_4"
 
 couch = couchdb.Server() #default/empty is localhost
-db = couch['ble']
+db = couch['local_ip']
 
+localIP = check_output(['hostname', '-I'])
+localIP = localIP.rstrip()
+
+doc = {'piLocalIP': localIP, 'pi_id': pi_id}
+db.save(doc)
+print doc
+
+db = couch['ble']
 dev_id = 0
 try:
 	sock = bluez.hci_open_dev(dev_id)
@@ -27,7 +38,10 @@ while True:
 	for beacon in returnedList:
 		mac = beacon.split(",")[0]
 		if mac == "0c:f3:ee:00:eb:ea":
-			doc = {'ble_data': beacon}
+			RSSI = beacon.split(",")[5]
+			TX_power = beacon.split(",")[4]
+			doc = {'pi_id': pi_id, 'MAC': mac, 'TX_power': TX_power, 'RSSI':RSSI}
+			#doc = {'ble_data': beacon, 'pi_id': pi_id}
 			db.save(doc)
 			print doc
 			#print beacon
