@@ -25,7 +25,7 @@ while 1:
 	if(arduinoSerialData.inWaiting()>0):
      		myData=arduinoSerialData.readline()
 		for row in db:
-			print("hello")
+			print(row)
 #	        item = server.query(query_fun)
 #       		print("query is: ",item)
         	print("the Epc is: ", myData)
