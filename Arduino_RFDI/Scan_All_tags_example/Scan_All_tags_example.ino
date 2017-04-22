@@ -24,8 +24,8 @@ RFID nano; //Create instance
 
 //set up globals
 int myEPClength = 12;
-byte EPCS_arrarr[MAX_NUMBER_OF_ITEMS][myEPClength];
-byte new_ECP_arr[myEPClength];
+byte EPCS_arrarr[MAX_NUMBER_OF_ITEMS][12];
+byte new_ECP_arr[12];
 
 void setup()
 {
@@ -78,13 +78,13 @@ void loop()
   //Serial.read(); //Throw away the user's character
 
   int number_of_unq_EPC = 0;
-  byte EPClength = myEPClength;
+  byte myEPClength;
   byte responseType = 0;
   Serial.println("Starting Scan");
   while (0 != RESPONSE_SUCCESS)//RESPONSE_IS_TAGFOUND)
   {
     myEPClength = sizeof(new_ECP_arr); //Length of EPC is modified each time .readTagEPC is called
-    responseType = nano.readTagEPC(new_ECP_arr, EPClength, 500); //Scan for a new tag up to 500ms
+    responseType = nano.readTagEPC(new_ECP_arr, myEPClength, 1500); //Scan for a new tag up to 500ms
     if (responseType == RESPONSE_SUCCESS) {
       if (insert_into_array_if_unq(number_of_unq_EPC) == true) {
         //this means the EPC is unq. and has been added to the global array

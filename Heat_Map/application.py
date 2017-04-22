@@ -52,6 +52,29 @@ class RandomThread(Thread):
     def run(self):
         self.randomNumberGenerator()
 
+class PullerThread(Thread):
+    def __init__(self):
+        self.delay = 1
+        super(RandomThread, self).__init__()
+
+    def pullData(self):
+        """
+        Pull data from CouchDB processed_ble server
+        """
+        print("Pulling locations from database")
+
+        server = couchdb.client.Server(COUCHDB_SERVER)
+        server.resource.credentials = ('admin', 'drewmeyers#1')
+        db = server['ble']
+
+        for change in db.changes(feed='continuous', since='now'):
+            doc = db.get(change['id'])
+            socketio.emit('newnumber', {'x':doc['location_x'], 'y':doc['location_y']})
+            if not thread_stop_event.isSet():
+                break
+
+    def run(self):
+        self.pullData()
 
 @app.route('/')
 def index():
@@ -67,7 +90,7 @@ def test_connect():
     #Start the random number generator thread only if the thread has not been started before.
     if not thread.isAlive():
         print ("Starting Thread")
-        thread = RandomThread()
+        thread = PullerThread()
         thread.start()
 
 @socketio.on('disconnect', namespace='/test')
