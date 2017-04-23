@@ -41,7 +41,8 @@
             <li><a href="#">Heat Map</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li data-toggle="modal" data-target="#myModal" id="navLogin"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li id="navSignOut" class="hide"><a href="#">Sign Out</a></li>
           </ul>
         </div>
       </div>
@@ -54,7 +55,43 @@
       </div>
       <div class="text-center">
        <img class="piagram" src="VennPiagram.png">
-       <p></p>
+       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ullamcorper dolor eu eros pharetra aliquam. Nunc a erat lacinia, feugiat libero quis, fermentum erat. Fusce eget varius dolor, ac dignissim purus. Praesent faucibus tincidunt magna, quis egestas nibh. Donec purus enim, interdum ut augue sit amet, porttitor tincidunt nunc. Quisque gravida euismod ligula, posuere hendrerit enim venenatis quis. Morbi in vehicula velit, vel viverra eros. Ut vel ipsum cursus, scelerisque lectus id, aliquet mi. Sed mollis varius dictum. Praesent varius sagittis eros. Vivamus tristique tortor eu erat varius, quis vestibulum dolor placerat. Nulla efficitur tincidunt consequat.
+
+Maecenas posuere urna sed ligula tempor, ut sodales dolor egestas. Morbi ac maximus sem. Aenean pulvinar magna est, nec egestas enim lobortis a. Donec a mattis erat, a lacinia enim. Donec hendrerit ut massa sed dictum. Sed nec risus in ante dictum pharetra eu at odio. Donec malesuada libero augue, vel feugiat mi hendrerit ut. Nunc vel ex sodales, ornare ipsum finibus, malesuada lacus. Nullam dolor odio, condimentum id libero sed, convallis imperdiet ipsum. Cras lacinia odio non justo consequat, a blandit nisi aliquam.
+
+Vestibulum vel faucibus sem, condimentum semper massa. Morbi egestas ante non purus volutpat, a lobortis sem feugiat. Sed aliquam elit nisl, sit amet lobortis metus tincidunt nec. Nulla quis interdum felis. Nunc egestas in dolor et viverra. Vivamus scelerisque sed sapien in commodo. Fusce at eros est. Mauris ligula justo, vulputate vitae nulla id, mattis mollis tortor. Donec pharetra bibendum diam. Cras ultrices justo ut ultrices porta. Maecenas suscipit justo eu dui tempus, in dapibus tellus ultrices. Fusce leo elit, aliquet ut viverra molestie, tempor et urna.</p>
+      </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Login</h4>
+          </div>
+          <div class="modal-body">
+            <form class="login_form">
+              <div class="form-group">
+                <label for="email">Email address:</label>
+                <input type="email" class="form-control" id="txtEmail">
+              </div>
+              <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="txtPassword">
+              </div>
+              <button type="submit" class="btn btn-info" id="btnSignUp">Sign Up</button>
+              <button type="submit" class="btn btn-success" id="btnLogin">Login</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -67,22 +104,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
-    <script>
-
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyBpkRAES6x70xhygiQAg_lN6dv2nlCAw0k",
-        authDomain: "funul-8cd90.firebaseapp.com",
-        databaseURL: "https://funul-8cd90.firebaseio.com",
-        projectId: "funul-8cd90",
-        storageBucket: "funul-8cd90.appspot.com",
-        messagingSenderId: "1046205384342"
-      };
-      firebase.initializeApp(config);
-
-    </script>
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-database.js"></script>
+    <script src="login.js"></script>
   </body>
 </html>
