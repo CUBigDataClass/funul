@@ -66,6 +66,17 @@
       </div>
     </div>
 
+    <!-- HeatMap -->
+    <div class="container" id="heat-map" onLoad="load_socket()">
+      <div id="canvas" style ="position: relative; left:0px; top:0px;">
+    <!--<div id="canvas" stype ="position: relative;">-->
+      
+        <!--  <canvas style="position: relative; left:0px; top:0px;"></canvas>-->
+        <canvas width="958" height="877"></canvas>
+    </div>
+    </div>
+
+
     <!-- Login Modal -->
     <div id="myModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
@@ -111,5 +122,10 @@
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-database.js"></script>
     <script src="static/js/login.js"></script>
+
+    <!-- HeatMap -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+    <script src="static/js/application.js"></script>
+    <script src="/static/js/heatmap.js"></script>
   </body>
 </html>
