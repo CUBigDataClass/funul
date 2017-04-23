@@ -11,17 +11,17 @@ db = server['items']
 
 db.save({
 	'price':20,
-	'gid':'E20051860107018821103A93',
+	'gid':'E2 00 51 86 01 07 01 88 21 10 3A 93',
 	'uid':'0000000',
 	'status':'II',
 	'item_Name':'MILK',
 	'date_sold':'00/00/00',
 	'sold_to':'creg'
-})	
+})
 
 db.save({
 	'price':50,
-	'gid':'E20051860107018821103A93',
+	'gid':'E2 00 51 86 01 07 01 88 20 70 3D 5F',
 	'uid':'0000000',
 	'status':'II',
 	'item_Name':'MILK',
@@ -30,32 +30,77 @@ db.save({
 
 db.save({
 	'price':80,
-	'gid':'E20051860107018821103A93',
+	'gid':'53 75 73 68 69 21 01 88 07 90 C4 BF',
 	'uid':'0000000',
 	'status':'II',
 	'item_Name':'MILK',
 	'date_sold':'00/00/00',
-	'sold_to':'creg'})	
+	'sold_to':'creg'})
 
 
 db.save({
 	'price':10,
-	'gid':'E20051860107018821103A93',
+	'gid':'68 65 6C 6C 6F 21 01 88 07 60 C9 B8',
 	'uid':'0000000',
 	'status':'II',
 	'item_Name':'MILK',
 	'date_sold':'00/00/00',
-	'sold_to':'creg'})	
+	'sold_to':'creg'})
 
 
 db.save({
 	'price':5
-	'gid':'E20051860107018821103A93',
+	'gid':'4D 69 6C 6B 01 07 01 88 07 70 C4 BD',
 	'uid':'0000000',
 	'status':'II',
 	'item_Name':'MILK',
 	'date_sold':'00/00/00',
-	'sold_to':'creg'})	
+	'sold_to':'creg'})
+
+db.save({
+	'price':22
+	'gid':'E2 00 51 86 01 07 01 88 08 00 C4 C0',
+	'uid':'0000000',
+	'status':'II',
+	'item_Name':'MILK',
+	'date_sold':'00/00/00',
+	'sold_to':'creg'})
+
+db.save({
+	'price':15
+	'gid':'E2 00 51 86 01 07 01 88 21 00 3A 92',
+	'uid':'0000000',
+	'status':'II',
+	'item_Name':'MILK',
+	'date_sold':'00/00/00',
+	'sold_to':'creg'})
+
+db.save({
+	'price':3
+	'gid':'48 65 6C 6C 6F 21 01 88 07 80 C4 BE',
+	'uid':'0000000',
+	'status':'II',
+	'item_Name':'MILK',
+	'date_sold':'00/00/00',
+	'sold_to':'creg'})
+
+db.save({
+	'price':55
+	'gid':'E2 00 51 86 01 07 01 88 20 80 3D 60',
+	'uid':'0000000',
+	'status':'II',
+	'item_Name':'MILK',
+	'date_sold':'00/00/00',
+	'sold_to':'creg'})
+
+db.save({
+	'price':19
+	'gid':'E2 00 51 86 01 07 01 88 20 90 3A 91',
+	'uid':'0000000',
+	'status':'II',
+	'item_Name':'MILK',
+	'date_sold':'00/00/00',
+	'sold_to':'creg'})
 
 
 
@@ -70,4 +115,4 @@ db.save({
 
 
 
-	
+
