@@ -8,7 +8,7 @@ import time
 SERVERS = ['localhost:9092']
 TOPIC= 'bluetooth_readings' # topic to be used for all trilateration procedures
 ACKS = 0 # don't require any acknowledgements to consider the request complete
-COUCHDB_SERVER = 'http://52.15.234.53:5984'
+COUCHDB_SERVER = 'http://52.14.61.109:5984'
 
 server = couchdb.client.Server(COUCHDB_SERVER)
 server.resource.credentials = ('admin', 'drewmeyers#1')

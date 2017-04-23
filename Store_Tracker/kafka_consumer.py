@@ -5,13 +5,15 @@ import statistics
 import json
 import sys
 import trilateration
+from queue import *
+
 
 SERVERS = ['localhost:9092'] # kafka server list
 TOPIC = 'bluetooth_readings' # topic to be used for all trilateration procedures
 GROUP_ID = 'blah'
 TIME_WINDOW = 5 # in seconds
 TX_POWER = -63 # power received by receiver at distance of 1m
-COUCHDB_SERVER = 'http://52.15.234.53:5984'
+COUCHDB_SERVER = 'http://52.14.61.109:5984'
 
 
 # start new reading every X seconds
@@ -25,9 +27,9 @@ readings = {}
 # give them static ips (which also makes automation difficult)
 pi_locations = {
     'pi_1': trilateration.point(0.0,0.0),
-    'pi_2': trilateration.point(0.5,0.0),
-    'pi_3': trilateration.point(0.0,0.5),
-    'pi_4': trilateration.point(0.5,0.5)
+    'pi_2': trilateration.point(0.0,7.98),
+    'pi_3': trilateration.point(7.82,7.98),
+    'pi_4': trilateration.point(7.82,0)
 }
 
 # processed data will be added to separate database
@@ -36,7 +38,7 @@ db = server['processed_ble']
 
 consumer = KafkaConsumer(TOPIC, bootstrap_servers=SERVERS, auto_offset_reset='earliest', group_id=GROUP_ID)
 for msg in consumer:
-    device_id = msg[5]
+    beacon_id = msg[5]
     data = json.loads(msg[6].decode('utf-8'))
 
     # change epoch if there is a backlog
@@ -51,35 +53,36 @@ for msg in consumer:
 
     # append rssi reading to list if list for pi id exists, otherwise create one
     if data['pi_id'] in readings:
-        readings[data['pi_id']].append(data['RSSI'])
+        if readings[data['pi_id']].full():
+            readings[data['pi_id']].get()
+        readings[data['pi_id']].put(data['RSSI'])
     else:
-        readings[data['pi_id']] = [data['RSSI']]
+        readings[data['pi_id']] = Queue(maxsize=100)
+        readings[data['pi_id']].put(data['RSSI'])
      
     # do actual processing after every time window elapses
     if data['epoch_time'] - last_window_epoch >= TIME_WINDOW:
         last_window_epoch = data['epoch_time']
-        median_distances = []
+        pi_distances = []
         for pi_id in readings:
-            distances = []
-            for rssi_reading in readings[pi_id]:
-                # the formula used to compute the distances is 10^((TxPower-RSSI)/20)
-                # it is derived from a formula which appears in the following paper:
-                # http://www.rn.inf.tu-dresden.de/dargie/papers/icwcuca.pdf
-                distances.append(10.0**((float(TX_POWER)-float(rssi_reading))/20.0))
-            median_distance = statistics.median(distances)
-            median_distances.append((pi_id, median_distance))
-        median_distances.sort(key=lambda x: x[1])
+            mean_rssi = statistics.mean(list(readings[pi_id].queue))
+            # the formula used to compute the distances is 10^((TxPower-RSSI)/20)
+            # it is derived from a formula which appears in the following paper:
+            # http://www.rn.inf.tu-dresden.de/dargie/papers/icwcuca.pdf
+            distance = 10.0**((float(TX_POWER)-float(mean_rssi))/20.0)
+            pi_distances.append((pi_id, distance))
+        pi_distances.sort(key=lambda x: x[1])
 
-        print(median_distances)
+        print(pi_distances)
 
-        # use trilateration on three pis with smallest median distances
-        if len(median_distances) < 3:
+        # use trilateration on three pis with smallest pi distances
+        if len(pi_distances) < 3:
             continue
 
         circle_list = [
-            trilateration.circle(pi_locations[median_distances[0][0]], median_distances[0][1]),
-            trilateration.circle(pi_locations[median_distances[1][0]], median_distances[1][1]),
-            trilateration.circle(pi_locations[median_distances[2][0]], median_distances[2][1])]
+            trilateration.circle(pi_locations[pi_distances[0][0]], pi_distances[0][1]),
+            trilateration.circle(pi_locations[pi_distances[1][0]], pi_distances[1][1]),
+            trilateration.circle(pi_locations[pi_distances[2][0]], pi_distances[2][1])]
         for circle in circle_list:
             print(circle.center.x, circle.center.y, circle.radius)
         computed_location = trilateration.do_trilateration(circle_list)
