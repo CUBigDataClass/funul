@@ -7,7 +7,7 @@ body {
   text-align: center;
 }
 .bg-color {
-  background-color: #982323!important;
+  background-color: #DFDCE3;
 }
 .pull-right {
   float: right;
@@ -15,7 +15,6 @@ body {
 }
 .header-logo
 {
-  height: 48px;
   width: 200px;
 }
 .piagram
