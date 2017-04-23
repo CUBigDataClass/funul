@@ -41,7 +41,6 @@
             <li><a href="#">Heat Map</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
           </ul>
         </div>
@@ -55,6 +54,7 @@
       </div>
       <div class="text-center">
        <img class="piagram" src="VennPiagram.png">
+       <p></p>
       </div>
     </div>
 
@@ -65,7 +65,24 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+    <script>
+
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBpkRAES6x70xhygiQAg_lN6dv2nlCAw0k",
+        authDomain: "funul-8cd90.firebaseapp.com",
+        databaseURL: "https://funul-8cd90.firebaseio.com",
+        projectId: "funul-8cd90",
+        storageBucket: "funul-8cd90.appspot.com",
+        messagingSenderId: "1046205384342"
+      };
+      firebase.initializeApp(config);
+
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-database.js"></script>
   </body>
 </html>
