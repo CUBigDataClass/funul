@@ -18,7 +18,7 @@ function setup() {
     heatmap = h337.create({
         container: document.getElementById('canvas'),
         // a waterdrop gradient ;-)
-        gradient: { .1: 'rgba(0,0,0,0)', 0.25: "rgba(0,0,90, .4)", .6: "blue", .9: "cyan", .95: 'rgba(255,255,255,.4)' },
+        gradient: { .1: 'rgba(79, 172, 254, 0.5)', 0.75: "rgba(0, 242, 254, 0.5)"},
         maxOpacity: .5,
         radius: 10,
         blur: .90
