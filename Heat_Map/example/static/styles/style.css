@@ -34,3 +34,6 @@ body {
 .diagram {
   padding: 16px;
 }
+.heat-map {
+  background-color: white;
+}
