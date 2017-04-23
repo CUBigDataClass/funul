@@ -35,5 +35,5 @@ body {
   padding: 16px;
 }
 .heat-map {
-  background-color: white;
+  background: rgba(255, 255, 255, 0.5);
 }
