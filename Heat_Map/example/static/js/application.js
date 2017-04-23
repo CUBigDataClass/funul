@@ -18,7 +18,7 @@ function setup() {
     heatmap = h337.create({
         container: document.getElementById('canvas'),
         // a waterdrop gradient ;-)
-        //gradient: { .1: 'rgba(0,0,0,0)', 0.25: "rgba(0,0,90, .6)", .6: "blue", .9: "cyan", .95: 'rgba(255,255,255,.4)' },
+        gradient: { .1: 'rgba(0,0,0,0)', 0.25: "rgba(0,0,90, .6)", .6: "blue", .9: "cyan", .95: 'rgba(255,255,255,.4)' },
         maxOpacity: .6,
         radius: 10,
         blur: .90
@@ -47,7 +47,7 @@ function update_heat_map(msg) {
         var y_serv = (msg.y * height) >> 0;
         console.log("x is ", x_serv, "y is ", y_serv);
         var c = 100;
-        var r = ( 10) >> 0;
+        var r = (50) >> 0;
 
         // add the datapoint to heatmap instance
         heatmap.addData({ x: x_serv, y: y_serv, value: c, radius: r });
