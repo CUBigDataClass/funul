@@ -49,7 +49,7 @@ db.save({
 
 
 db.save({
-	'price':5
+	'price':5,
 	'gid':'4D 69 6C 6B 01 07 01 88 07 70 C4 BD',
 	'uid':'0000000',
 	'status':'II',
@@ -58,7 +58,7 @@ db.save({
 	'sold_to':'creg'})
 
 db.save({
-	'price':22
+	'price':22,
 	'gid':'E2 00 51 86 01 07 01 88 08 00 C4 C0',
 	'uid':'0000000',
 	'status':'II',
@@ -67,7 +67,7 @@ db.save({
 	'sold_to':'creg'})
 
 db.save({
-	'price':15
+	'price':15,
 	'gid':'E2 00 51 86 01 07 01 88 21 00 3A 92',
 	'uid':'0000000',
 	'status':'II',
@@ -76,7 +76,7 @@ db.save({
 	'sold_to':'creg'})
 
 db.save({
-	'price':3
+	'price':3,
 	'gid':'48 65 6C 6C 6F 21 01 88 07 80 C4 BE',
 	'uid':'0000000',
 	'status':'II',
@@ -85,7 +85,7 @@ db.save({
 	'sold_to':'creg'})
 
 db.save({
-	'price':55
+	'price':55,
 	'gid':'E2 00 51 86 01 07 01 88 20 80 3D 60',
 	'uid':'0000000',
 	'status':'II',
@@ -94,7 +94,7 @@ db.save({
 	'sold_to':'creg'})
 
 db.save({
-	'price':19
+	'price':19,
 	'gid':'E2 00 51 86 01 07 01 88 20 90 3A 91',
 	'uid':'0000000',
 	'status':'II',
