@@ -61,6 +61,8 @@
       <div class="col-md-6">
         <h1>Find Your Customers</h1>
         <p>In today's commerce environment it is more and more important everyday to know where your customers are. Knowing where customers are spending the most time in your store can help determine an optimal layout to maximize revenue. Funul.io gives you insight on where your customers are spending the most time in your store by following their phone's bluetooth signal and mapping their movements.</p>
+        <h3>Our Stack</h3>
+        <p>Raspberry Pi's receive bluetooth signals from devices. These pi's deliver raw distance data to CouchDB. Kafka (hosted on AWS) receives this data, calculates a triangulation, and feeds new triangulated data back to CouchDB. A Flask server grabs this data and displays it as a heatmap. Product checkout is handled by another Pi with an RFID scanner. All user authorization is handled by Google Firebase.</p>
       </div>
       <div class="col-md-6 diagram">
         <img src="diagram.png" class="img-responsive">
