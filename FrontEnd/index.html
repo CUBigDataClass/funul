@@ -20,9 +20,6 @@
   </head>
 
   <body>
-
-
-
     <nav class="navbar navbar-inverse fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -37,8 +34,8 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
-            <li><a href="#">About</a></li>
-            <li><a href="#">Heat Map</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#heat-map">Heat Map</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li data-toggle="modal" data-target="#myModal" id="navLogin"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -48,18 +45,25 @@
       </div>
     </nav>
 
-    <div class="container">
+    <!-- Splash Page -->
+    <div class="container" id="splash">
       <div class="starter-template">
         <h1>funul.io</h1>
         <p class="lead">Trianglation of Bluetooth Divices</p>
       </div>
       <div class="text-center">
        <img class="piagram" src="VennPiagram.png">
-       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ullamcorper dolor eu eros pharetra aliquam. Nunc a erat lacinia, feugiat libero quis, fermentum erat. Fusce eget varius dolor, ac dignissim purus. Praesent faucibus tincidunt magna, quis egestas nibh. Donec purus enim, interdum ut augue sit amet, porttitor tincidunt nunc. Quisque gravida euismod ligula, posuere hendrerit enim venenatis quis. Morbi in vehicula velit, vel viverra eros. Ut vel ipsum cursus, scelerisque lectus id, aliquet mi. Sed mollis varius dictum. Praesent varius sagittis eros. Vivamus tristique tortor eu erat varius, quis vestibulum dolor placerat. Nulla efficitur tincidunt consequat.
+      </div>
+    </div>
 
-Maecenas posuere urna sed ligula tempor, ut sodales dolor egestas. Morbi ac maximus sem. Aenean pulvinar magna est, nec egestas enim lobortis a. Donec a mattis erat, a lacinia enim. Donec hendrerit ut massa sed dictum. Sed nec risus in ante dictum pharetra eu at odio. Donec malesuada libero augue, vel feugiat mi hendrerit ut. Nunc vel ex sodales, ornare ipsum finibus, malesuada lacus. Nullam dolor odio, condimentum id libero sed, convallis imperdiet ipsum. Cras lacinia odio non justo consequat, a blandit nisi aliquam.
-
-Vestibulum vel faucibus sem, condimentum semper massa. Morbi egestas ante non purus volutpat, a lobortis sem feugiat. Sed aliquam elit nisl, sit amet lobortis metus tincidunt nec. Nulla quis interdum felis. Nunc egestas in dolor et viverra. Vivamus scelerisque sed sapien in commodo. Fusce at eros est. Mauris ligula justo, vulputate vitae nulla id, mattis mollis tortor. Donec pharetra bibendum diam. Cras ultrices justo ut ultrices porta. Maecenas suscipit justo eu dui tempus, in dapibus tellus ultrices. Fusce leo elit, aliquet ut viverra molestie, tempor et urna.</p>
+    <!-- About -->
+    <div class="container" id="about">
+      <div class="col-md-6">
+        <h1>Find Your Customers</h1>
+        <p>In today's commerce environment it is more and more important everyday to know where your customers are. Knowing where customers are spending the most time in your store can help determine an optimal layout to maximize revenue. Funul.io gives you insight on where your customers are spending the most time in your store by following their phone's bluetooth signal and mapping their movements.</p>
+      </div>
+      <div class="col-md-6">
+        <img src="diagram.png" class="diagram">
       </div>
     </div>
 

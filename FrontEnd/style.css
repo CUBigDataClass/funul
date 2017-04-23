@@ -26,8 +26,11 @@ body {
 .form-group {
 
 }
-.piagram
-{
+.piagram {
   height: 40%;
   width: 40%;
+  padding: 16px;
+}
+.diagram {
+  height: 640px;
 }

@@ -17,6 +17,7 @@
 	const loginForm = document.getElementById('login_form');
   const btnNavLogin = document.getElementById('navLogin');
   const btnSignOut = document.getElementById('navSignOut');
+  const splashDiv = document.getElementById('splash');
 
   //add login event
 	btnLogin.addEventListener('click', e => {
@@ -53,9 +54,11 @@
       var uid = user.uid;
       btnNavLogin.classList.add('hide');
       btnSignOut.classList.remove('hide');
+      splashDiv.classList.add("hide");
     } else {
       btnNavLogin.classList.remove('hide');
       btnSignOut.classList.add('hide');
+      splashDiv.classList.remove("hide");
     }
   });
 
