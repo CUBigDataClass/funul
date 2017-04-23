@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+    <script src="static/js/application.js"></script>
+    <script src="/static/js/heatmap.js"></script>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <title>Raindrops example (custom gradient) | heatmap.js</title>
+
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            border: 0;
+            overflow: hidden; /*  Disable scrollbars */
+            display: block; /* No floating content on sides */
+        }
+    </style>
+</head>
+
+<body onLoad="load_socket()">
+    <div id="canvas" style ="position: relative; left:0px; top:0px;">
+    <!--<div id="canvas" stype ="position: relative;">-->>
+      
+        <!--  <canvas style="position: relative; left:0px; top:0px;"></canvas>-->
+        <canvas width="958" height="877"></canvas>
+    </div>
+</body>
+</html>
