@@ -8,11 +8,11 @@ server.resource.credentials = ('admin','drewmeyers#1')
 db = server['inventory']
 
 
-arduinoSerialData=serial.Serial('/dev/ttyUSB0',115200)
+#arduinoSerialData=serial.Serial('/dev/ttyUSB0',115200)
 
 
 query_fun = """functin(doc) {
-	if (doc.type == 'item' && doc.EPC == 'EPC_NUMBER')  {
+	if (doc.type == 'item')  {
         	emit(doc.name, null);
 
 	}
@@ -22,10 +22,12 @@ query_fun = """functin(doc) {
 
 while 1:
 #	print("in loop")	
-	if(arduinoSerialData.inWaiting()>0):
-     		myData=arduinoSerialData.readline()
-		for row in db:
-			print(row)
-#	        item = server.query(query_fun)
-#       		print("query is: ",item)
-        	print("the Epc is: ", myData)
+#	if(arduinoSerialData.inWaiting()>0):
+ #    		myData=arduinoSerialData.readline()
+
+
+#		for row in db:
+#			print(row)
+	        for row in db.temporary_query(query_fun):
+	       		print("query is: ",row)
+#        	print("the Epc is: ", myData)

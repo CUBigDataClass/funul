@@ -11,8 +11,8 @@ db = server['items']
 
 db.save({
 	'price':20,
+	'gid':'E20051860107018821103A93',
 	'uid':'0000000',
-	'gid':'0000000',
 	'status':'II',
 	'item_Name':'MILK',
 	'date_sold':'00/00/00',
@@ -21,8 +21,8 @@ db.save({
 
 db.save({
 	'price':50,
-	'uid':'0000001',
-	'gid':'0000000',
+	'gid':'E20051860107018821103A93',
+	'uid':'0000000',
 	'status':'II',
 	'item_Name':'MILK',
 	'date_sold':'00/00/00',
@@ -30,8 +30,8 @@ db.save({
 
 db.save({
 	'price':80,
-	'uid':'0000020',
-	'gid':'0000000',
+	'gid':'E20051860107018821103A93',
+	'uid':'0000000',
 	'status':'II',
 	'item_Name':'MILK',
 	'date_sold':'00/00/00',
@@ -40,8 +40,8 @@ db.save({
 
 db.save({
 	'price':10,
-	'uid':'0000003',
-	'gid':'0000000',
+	'gid':'E20051860107018821103A93',
+	'uid':'0000000',
 	'status':'II',
 	'item_Name':'MILK',
 	'date_sold':'00/00/00',
@@ -49,9 +49,9 @@ db.save({
 
 
 db.save({
-	'price':5,
-	'uid':'0000004',
-	'gid':'0000000',
+	'price':5
+	'gid':'E20051860107018821103A93',
+	'uid':'0000000',
 	'status':'II',
 	'item_Name':'MILK',
 	'date_sold':'00/00/00',
