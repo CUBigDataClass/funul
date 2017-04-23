@@ -6,48 +6,95 @@
 
     <title>funul.io</title>
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
     <!-- Custom styles for this template -->
-    <link href="style.css" rel="stylesheet">
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
-    <!-- d3 -->
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <link href="styles/style.css" rel="stylesheet">
   </head>
 
   <body>
-
-
-
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-color fixed-top">
-
-      <a class="navbar-brand" href="#">
-          <img src="Funul.png" class="d-inline-block align-top header-logo" alt="funul">
-      </a>
-
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault" style="margin-top:20px">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#heatmap">Heat Map</a>
-          </li>
-        </ul>
-
+    <nav class="navbar navbar-inverse fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+            <img src="img/funul.png" id="logo">
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="#about">About</a></li>
+            <li><a href="#heat-map">Heat Map</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li data-toggle="modal" data-target="#myModal" id="navLogin"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li id="navSignOut" class="hide"><a href="#">Sign Out</a></li>
+          </ul>
+        </div>
       </div>
     </nav>
 
-    <div class="container">
+    <!-- Splash Page -->
+    <div class="container" id="splash">
       <div class="starter-template">
         <h1>funul.io</h1>
         <p class="lead">Trianglation of Bluetooth Divices</p>
       </div>
       <div class="text-center">
-       <img class="piagram" src="VennPiagram.png">
+       <img class="piagram" src="img/VennPiagram.png">
+      </div>
+    </div>
+
+    <!-- About -->
+    <div class="container" id="about">
+      <div class="col-md-6">
+        <h1>Find Your Customers</h1>
+        <p>In today's commerce environment it is more and more important everyday to know where your customers are. Knowing where customers are spending the most time in your store can help determine an optimal layout to maximize revenue. Funul.io gives you insight on where your customers are spending the most time in your store by following their phone's bluetooth signal and mapping their movements.</p>
+        <h3>Our Stack</h3>
+        <p>Raspberry Pi's receive bluetooth signals from devices. These pi's deliver raw distance data to CouchDB. Kafka (hosted on AWS) receives this data, calculates a triangulation, and feeds new triangulated data back to CouchDB. A Flask server grabs this data and displays it as a heatmap. Product checkout is handled by another Pi with an RFID scanner. All user authorization is handled by Google Firebase.</p>
+      </div>
+      <div class="col-md-6 diagram">
+        <img src="img/diagram.png" class="img-responsive">
+      </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Login</h4>
+          </div>
+          <div class="modal-body">
+            <form class="login_form">
+              <div class="form-group">
+                <label for="email">Email address:</label>
+                <input type="email" class="form-control" id="txtEmail">
+              </div>
+              <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="txtPassword">
+              </div>
+              <button type="submit" class="btn btn-info" id="btnSignUp">Sign Up</button>
+              <button type="submit" class="btn btn-success" id="btnLogin">Login</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -57,8 +104,12 @@
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-database.js"></script>
+    <script src="js/login.js"></script>
   </body>
 </html>
