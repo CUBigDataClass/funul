@@ -47,7 +47,7 @@ function update_heat_map(msg) {
         var y_serv = (msg.y * height) >> 0;
         console.log("x is ", x_serv, "y is ", y_serv);
         var c = 100;
-        var r = (50) >> 0;
+        var r = (100) >> 0;
 
         // add the datapoint to heatmap instance
         heatmap.addData({ x: x_serv, y: y_serv, value: c, radius: r });
