@@ -8,7 +8,11 @@ import bluetooth._bluetooth as bluez
 from subprocess import check_output
 import time
 
-pi_id = "pi_4"
+pi_id_file = open('/home/pi/pi_id.txt', 'r')
+
+pi_id = pi_id_file.readline()
+
+pi_id = pi_id.rstrip('\n')
 
 couch = couchdb.Server() #default/empty is localhost
 db = couch['local_ip']
