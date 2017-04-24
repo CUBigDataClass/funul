@@ -22,7 +22,7 @@ DISTANCE = '1.524m'
 file_rssi_median = open('calibration_median_rssi_' + PI_TO_TEST + '_' + DISTANCE + '.csv', 'w')
 file_rssi_raw = open('calibration_raw_rssi_' + PI_TO_TEST + '_' + DISTANCE + '.csv', 'w')
 file_distance = open('calibration_distance_' + PI_TO_TEST + '_' + DISTANCE + '.csv', 'w')
-file_epoch = open('calibration_epoch_' + PI_TO_TEST + '_' + DISTANCE + 'csv', 'w')
+file_epoch = open('calibration_epoch_' + PI_TO_TEST + '_' + DISTANCE + '.csv', 'w')
 
 # start new reading every X seconds
 last_window_epoch = time.time()
