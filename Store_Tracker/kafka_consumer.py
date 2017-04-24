@@ -101,14 +101,23 @@ for msg in consumer:
             if computed_location.y != 0:
                 computed_locations_y.append(computed_location.y)
 
+
+        # ignore data if no intersecting points are found
+        if len(computed_locations_x) == 0 or len(computed_locations_y) == 0:
+            continue
+
         # take medians of computed locations
         median_x = statistics.median(computed_locations_x)
         median_y = statistics.median(computed_locations_y)
 
+        # normalize these results by dividing by x difference and y difference
+        normalized_x = median_x / 7.82
+        normalized_y = median_y / 7.98
+
         # add processed data to database
         new_doc = {
-            'location_x': median_x,
-            'location_y': median_y,
+            'location_x': normalized_x,
+            'location_y': normalized_y,
             'epoch_time': last_window_epoch
         }
         db.save(new_doc)
