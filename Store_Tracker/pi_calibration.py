@@ -20,10 +20,11 @@ PI_TO_TEST = 'pi_1'
 
 file_rssi = open('calibration_mean_rssi_' + PI_TO_TEST + '.csv', 'w')
 file_distance = open('calibration_distance_' + PI_TO_TEST + '.csv', 'w')
+file_epoch = open('calibration_epoch_' + PI_TO_TEST + 'csv', 'w')
 
 # start new reading every X seconds
 last_window_epoch = time.time()
-readings = Queue(maxsize=100)
+readings = Queue(maxsize=10)
 
 # the pi locations would ideally be set on the actual pis and then stored in the database.
 # we are manually entering them here for demo purposes. it is time-consuming to manually
@@ -61,8 +62,10 @@ for msg in consumer:
     # http://www.rn.inf.tu-dresden.de/dargie/papers/icwcuca.pdf
     distance = 10.0**((float(TX_POWER)-float(mean_rssi))/20.0)
 
+    print(mean_rssi, distance)
 
     file_rssi.write(str(mean_rssi) + ',')
     file_distance.write(str(distance) + ',')
+    file_epoch.write(str(distance) +  ',')
 
 consumer.close()
