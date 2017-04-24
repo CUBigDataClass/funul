@@ -37,3 +37,8 @@ body {
 .heat-map {
   background: rgba(255, 255, 255, 0.5);
 }
+.canvas {
+  position: relative;
+  left: 0px;
+  top: 0px;
+}

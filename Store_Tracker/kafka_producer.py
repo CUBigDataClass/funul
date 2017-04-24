@@ -17,8 +17,13 @@ producer = KafkaProducer(bootstrap_servers=SERVERS, acks=ACKS)
 
 for change in db.changes(feed='continuous', since='now'):
     doc = db.get(change['id'])
+
+    if doc['beacon_id'] != 'rox_1':
+        continue
+
     json_str = json.dumps({
         'pi_id': doc['pi_id'],
+        'beacon_id': doc['beacon_id'],
         'RSSI': int(doc['RSSI']),
         'epoch_time': doc['epoch_time']
     })

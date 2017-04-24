@@ -5,6 +5,7 @@ import statistics
 import json
 import sys
 import trilateration
+import itertools
 from queue import *
 
 
@@ -38,8 +39,11 @@ db = server['processed_ble']
 
 consumer = KafkaConsumer(TOPIC, bootstrap_servers=SERVERS, auto_offset_reset='earliest', group_id=GROUP_ID)
 for msg in consumer:
-    beacon_id = msg[5]
     data = json.loads(msg[6].decode('utf-8'))
+
+    # only track one beacon
+    if data['beacon_id'] != 'rox_1':
+        continue
 
     # change epoch if there is a backlog
     if not first_reading_done and data['epoch_time'] < last_window_epoch:
@@ -57,7 +61,7 @@ for msg in consumer:
             readings[data['pi_id']].get()
         readings[data['pi_id']].put(data['RSSI'])
     else:
-        readings[data['pi_id']] = Queue(maxsize=100)
+        readings[data['pi_id']] = Queue(maxsize=10)
         readings[data['pi_id']].put(data['RSSI'])
      
     # do actual processing after every time window elapses
@@ -65,11 +69,13 @@ for msg in consumer:
         last_window_epoch = data['epoch_time']
         pi_distances = []
         for pi_id in readings:
-            mean_rssi = statistics.mean(list(readings[pi_id].queue))
+            print(list(readings[pi_id].queue))
+            median_rssi = statistics.mean(list(readings[pi_id].queue))
             # the formula used to compute the distances is 10^((TxPower-RSSI)/20)
             # it is derived from a formula which appears in the following paper:
             # http://www.rn.inf.tu-dresden.de/dargie/papers/icwcuca.pdf
-            distance = 10.0**((float(TX_POWER)-float(mean_rssi))/20.0)
+            n = 2
+            distance = 7*10**((float(TX_POWER)-float(median_rssi))/(10*n))
             pi_distances.append((pi_id, distance))
         pi_distances.sort(key=lambda x: x[1])
 
@@ -79,24 +85,44 @@ for msg in consumer:
         if len(pi_distances) < 3:
             continue
 
-        circle_list = [
-            trilateration.circle(pi_locations[pi_distances[0][0]], pi_distances[0][1]),
-            trilateration.circle(pi_locations[pi_distances[1][0]], pi_distances[1][1]),
-            trilateration.circle(pi_locations[pi_distances[2][0]], pi_distances[2][1])]
-        for circle in circle_list:
-            print(circle.center.x, circle.center.y, circle.radius)
-        computed_location = trilateration.do_trilateration(circle_list)
+        # process on each combination of three pis
+        computed_locations_x = []
+        computed_locations_y = []
+        for pi_combo in itertools.combinations(pi_distances, 3):
+            circle_list = [
+                trilateration.circle(pi_locations[pi_distances[0][0]], pi_distances[0][1]),
+                trilateration.circle(pi_locations[pi_distances[1][0]], pi_distances[1][1]),
+                trilateration.circle(pi_locations[pi_distances[2][0]], pi_distances[2][1])]
+            computed_location = trilateration.do_trilateration(circle_list)
 
+            # do not consider pis without intersecting points
+            if computed_location.x != 0:
+                computed_locations_x.append(computed_location.x)
+            if computed_location.y != 0:
+                computed_locations_y.append(computed_location.y)
+
+
+        # ignore data if no intersecting points are found
+        if len(computed_locations_x) == 0 or len(computed_locations_y) == 0:
+            continue
+
+        # take medians of computed locations
+        median_x = statistics.median(computed_locations_x)
+        median_y = statistics.median(computed_locations_y)
+
+        # normalize these results by dividing by x difference and y difference
+        normalized_x = median_x / 7.82
+        normalized_y = median_y / 7.98
 
         # add processed data to database
         new_doc = {
-            'location_x': computed_location.x,
-            'location_y': computed_location.y,
+            'location_x': normalized_x,
+            'location_y': normalized_y,
             'epoch_time': last_window_epoch
         }
         db.save(new_doc)
 
-        print(computed_location.x, computed_location.y)
+        print(median_x, median_y)
         sys.stdout.flush()
 
 consumer.close()
