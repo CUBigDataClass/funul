@@ -18,7 +18,8 @@ COUCHDB_SERVER = 'http://52.14.61.109:5984'
 # hardcoded pi id--put in id of pi being calibrated here
 PI_TO_TEST = 'pi_1'
 
-file_rssi = open('calibration_median_rssi_' + PI_TO_TEST + '.csv', 'w')
+file_rssi_median = open('calibration_median_rssi_' + PI_TO_TEST + '.csv', 'w')
+file_rssi_raw = open('calibration_raw_rssi_' + PI_TO_TEST + '.csv', 'w')
 file_distance = open('calibration_distance_' + PI_TO_TEST + '.csv', 'w')
 file_epoch = open('calibration_epoch_' + PI_TO_TEST + 'csv', 'w')
 
@@ -64,7 +65,8 @@ for msg in consumer:
 
     print(median_rssi, distance)
 
-    file_rssi.write(str(median_rssi) + ',')
+    file_rssi_median.write(str(median_rssi) + ',')
+    file_rssi_raw.write(str(data['RSSI']))
     file_distance.write(str(distance) + ',')
     file_epoch.write(str(data['epoch_time']) +  ',')
 
