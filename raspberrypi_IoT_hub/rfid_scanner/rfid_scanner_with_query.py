@@ -49,8 +49,8 @@ while 1:
 		#print(myData)
 			if (price != 0):
 				print(chr(27) + "[2J")
-				print(total)
-				print(items)
+				print('\n'.join(items))
+				print("Total cost: " + total)
 		if (total == 0):
 			print(myData)
 	if (time.time() - last_time_check > 30):
