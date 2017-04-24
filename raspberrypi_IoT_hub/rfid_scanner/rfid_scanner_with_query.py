@@ -47,6 +47,7 @@ while 1:
 			total = total + price
 		#print(myData)
 			if (price != 0):
+				print(chr(27) + "[2J")
 				print(total)
 				print(items)
 		print(myData)
