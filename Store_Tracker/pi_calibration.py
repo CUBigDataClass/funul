@@ -18,7 +18,7 @@ COUCHDB_SERVER = 'http://52.14.61.109:5984'
 # hardcoded pi id--put in id of pi being calibrated here
 PI_TO_TEST = 'pi_1'
 
-file_rssi = open('calibration_mean_rssi_' + PI_TO_TEST + '.csv', 'w')
+file_rssi = open('calibration_median_rssi_' + PI_TO_TEST + '.csv', 'w')
 file_distance = open('calibration_distance_' + PI_TO_TEST + '.csv', 'w')
 file_epoch = open('calibration_epoch_' + PI_TO_TEST + 'csv', 'w')
 
@@ -56,16 +56,16 @@ for msg in consumer:
     readings.put(data['RSSI'])
      
     # process data
-    mean_rssi = statistics.mean(list(readings.queue))
+    median_rssi = statistics.median(list(readings.queue))
     # the formula used to compute the distances is 10^((TxPower-RSSI)/20)
     # it is derived from a formula which appears in the following paper:
     # http://www.rn.inf.tu-dresden.de/dargie/papers/icwcuca.pdf
-    distance = 10.0**((float(TX_POWER)-float(mean_rssi))/20.0)
+    distance = 10.0**((float(TX_POWER)-float(median_rssi))/20.0)
 
-    print(mean_rssi, distance)
+    print(median_rssi, distance)
 
-    file_rssi.write(str(mean_rssi) + ',')
+    file_rssi.write(str(median_rssi) + ',')
     file_distance.write(str(distance) + ',')
-    file_epoch.write(str(distance) +  ',')
+    file_epoch.write(str(data['epoch_time']) +  ',')
 
 consumer.close()
