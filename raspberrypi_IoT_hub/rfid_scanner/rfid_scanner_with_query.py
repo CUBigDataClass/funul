@@ -2,6 +2,8 @@ import json
 import couchdb
 import serial
 import time
+import funul_email
+
 COUCHDB_SERVER = 'http://52.14.61.109:5984'
 
 server = couchdb.client.Server(COUCHDB_SERVER)
@@ -12,6 +14,7 @@ arduinoSerialData=serial.Serial('/dev/ttyUSB0',115200)
 
 last_change = 0
 items = []
+
 total = 0.0
 last_time_check = time.time()
 
@@ -26,9 +29,9 @@ def fun(doc,data,items_arr):
 		return(0)
 
 while 1:
-	if (int(time.time() - last_time_check) > last_change):	
-		print(int(time.time() - last_time_check))
-		last_change = int(time.time() - last_time_check)
+#	if (int(time.time() - last_time_check) > last_change):	
+#		print(int(time.time() - last_time_check))
+#		last_change = int(time.time() - last_time_check)
 	if (arduinoSerialData.inWaiting()>0):
 		myData = arduinoSerialData.readline()
 		myData.replace(" ","")
@@ -45,10 +48,13 @@ while 1:
 			total = total + price
 		#print(myData)
 			if (price != 0):
-				print(total)
-				print(items)
-		print(myData)
+				print(chr(27) + "[2J")
+				print('\n'.join(items))
+				print("Total cost: " + total)
+		if (total == 0):
+			print(myData)
 	if (time.time() - last_time_check > 30):
+		funul_email.sendMail(items,total)
 		last_time_check = 9999999999999999999
 		items = []
 		total = 0
