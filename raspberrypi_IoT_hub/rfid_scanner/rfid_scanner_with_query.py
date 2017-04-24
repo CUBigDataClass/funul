@@ -2,6 +2,8 @@ import json
 import couchdb
 import serial
 import time
+import funul_email
+
 COUCHDB_SERVER = 'http://52.14.61.109:5984'
 
 server = couchdb.client.Server(COUCHDB_SERVER)
@@ -49,6 +51,7 @@ while 1:
 				print(items)
 		print(myData)
 	if (time.time() - last_time_check > 30):
+		funul_email.sendMail(items,total)
 		last_time_check = 9999999999999999999
 		items = []
 		total = 0
