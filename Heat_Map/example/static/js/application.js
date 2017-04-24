@@ -12,8 +12,10 @@ $(window).onload(function(){
 })
 */
 function setup() {
-    width = (+window.getComputedStyle(document.body).width.replace(/px/, ''));
-    height = (+window.getComputedStyle(document.body).height.replace(/px/, ''));
+    // width = (+window.getComputedStyle(document.body).width.replace(/px/, ''));
+    // height = (+window.getComputedStyle(document.body).height.replace(/px/, ''));
+    width = document.getElementById('heat-map').offsetWidth;
+    height = document.getElementById('heat-map').offsetHeight;
     console.log("height is: ", height, "width is: ", width);
     heatmap = h337.create({
         container: document.getElementById('canvas'),
