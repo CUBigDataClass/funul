@@ -3,6 +3,7 @@ import couchdb
 import time
 import statistics
 import json
+import math
 import sys
 import trilateration
 import itertools
@@ -13,7 +14,6 @@ SERVERS = ['localhost:9092'] # kafka server list
 TOPIC = 'bluetooth_readings' # topic to be used for all trilateration procedures
 GROUP_ID = 'blah'
 TIME_WINDOW = 5 # in seconds
-TX_POWER = -63 # power received by receiver at distance of 1m
 COUCHDB_SERVER = 'http://52.14.61.109:5984'
 
 
@@ -26,11 +26,14 @@ readings = {}
 # we are manually entering them here for demo purposes. it is time-consuming to manually
 # change these values on multiple devices, especially on the school network where we cannot
 # give them static ips (which also makes automation difficult)
+MAX_X = 7.982
+MAX_Y = 7.98
+
 pi_locations = {
     'pi_1': trilateration.point(0.0,0.0),
-    'pi_2': trilateration.point(0.0,7.98),
-    'pi_3': trilateration.point(7.82,7.98),
-    'pi_4': trilateration.point(7.82,0)
+    'pi_2': trilateration.point(0.0,MAX_Y),
+    'pi_3': trilateration.point(MAX_X,MAX_Y),
+    'pi_4': trilateration.point(MAX_X,0)
 }
 
 # processed data will be added to separate database
@@ -39,10 +42,11 @@ db = server['processed_ble']
 
 consumer = KafkaConsumer(TOPIC, bootstrap_servers=SERVERS, auto_offset_reset='earliest', group_id=GROUP_ID)
 for msg in consumer:
+    continue
     data = json.loads(msg[6].decode('utf-8'))
 
     # only track one beacon
-    if data['beacon_id'] != 'rox_1':
+    if data['beacon_id'] != 'rb_nano_1':
         continue
 
     # change epoch if there is a backlog
@@ -71,11 +75,8 @@ for msg in consumer:
         for pi_id in readings:
             print(list(readings[pi_id].queue))
             median_rssi = statistics.mean(list(readings[pi_id].queue))
-            # the formula used to compute the distances is 10^((TxPower-RSSI)/20)
-            # it is derived from a formula which appears in the following paper:
-            # http://www.rn.inf.tu-dresden.de/dargie/papers/icwcuca.pdf
-            n = 2
-            distance = 7*10**((float(TX_POWER)-float(median_rssi))/(10*n))
+            # the following formula found from trendline in excel
+            distance = min(max(0.0052*math.abs(median_rssi)**2-0.2365*math.abs(median_rssi)+2.7178,0), min(MAX_X, MAX_Y))
             pi_distances.append((pi_id, distance))
         pi_distances.sort(key=lambda x: x[1])
 
