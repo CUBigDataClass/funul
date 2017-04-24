@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, async_mode=async_mode)
 thread = None
 Bootstrap(app)
-
+'''
 def background_thread():
     """Example of how to send server generated events to clients."""
     count = 0
@@ -29,20 +29,24 @@ def background_thread():
                       {'x':x, 'y':y},
                       namespace='/test')
 '''
-COUCHDB_SERVER = 'https://52.15.234.53:5984'
+COUCHDB_SERVER = 'http://52.14.61.109:5984'
 def background_thread():
     """Example of how to send server generated events to clients."""
 
     while True:
         server = couchdb.client.Server(COUCHDB_SERVER)
 	server.resource.credentials = ('admin', 'drewmeyers#1')
-	db = server['ble']
-	for change in db.changes(feed = 'continuous'):
+	db = server['processed_ble']
+	for change in db.changes(feed = 'continuous', since='now'):
 		doc = db.get(change['id'])
-		socketio.emit('newnumber',{'x':doc['location_x'],'y':doc['location_y']})
-		if not thread_stop_event.isSet():
-			break
-'''
+		print("here")
+		x_loc = doc['location_x']
+		y_loc = doc['location_y']
+		print(x_loc)
+		socketio.emit('newnumber',{'x':x_loc,'y':y_loc},namespace='/test')
+		#if not thread_stop_event.isSet():
+		#	break
+
 #url_for('static', filename='style.css')
 @app.route('/')
 def index():
@@ -51,17 +55,17 @@ def index():
 @socketio.on('my_broadcast_event', namespace='/test')
 def test_broadcast_message(message):
     session['receive_count'] = session.get('receive_count', 0) + 1
-    emit('my_response',
+    '''emit('my_response',
          {'data': message['data'], 'count': session['receive_count']},
          broadcast=True)
-
+'''
 @socketio.on('connect', namespace='/test')
 def test_connect():
     global thread
     if thread is None:
         thread = socketio.start_background_task(target=background_thread)
-    emit('my_response', {'data': 'Connected', 'count': 0})
-
+    '''emit('my_response', {'data': 'Connected', 'count': 0})
+'''
 
 @socketio.on('disconnect', namespace='/test')
 def test_disconnect():
@@ -69,4 +73,4 @@ def test_disconnect():
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, debug=True, host='0.0.0.0', port = 80)
