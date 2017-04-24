@@ -14,6 +14,7 @@ arduinoSerialData=serial.Serial('/dev/ttyUSB0',115200)
 
 last_change = 0
 items = []
+
 total = 0.0
 last_time_check = time.time()
 
@@ -28,9 +29,9 @@ def fun(doc,data,items_arr):
 		return(0)
 
 while 1:
-	if (int(time.time() - last_time_check) > last_change):	
-		print(int(time.time() - last_time_check))
-		last_change = int(time.time() - last_time_check)
+#	if (int(time.time() - last_time_check) > last_change):	
+#		print(int(time.time() - last_time_check))
+#		last_change = int(time.time() - last_time_check)
 	if (arduinoSerialData.inWaiting()>0):
 		myData = arduinoSerialData.readline()
 		myData.replace(" ","")
@@ -50,7 +51,8 @@ while 1:
 				print(chr(27) + "[2J")
 				print(total)
 				print(items)
-		print(myData)
+		if (total == 0):
+			print(myData)
 	if (time.time() - last_time_check > 30):
 		funul_email.sendMail(items,total)
 		last_time_check = 9999999999999999999
