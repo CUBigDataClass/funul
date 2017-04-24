@@ -9,5 +9,9 @@ smtpserver.ehlo()
 smtpserver.starttls()
 smtpserver.ehlo()
 smtpserver.login('drew.meyers@funul.io', 'drewmeyers#1')
-smtpserver.sendmail('drew.meyers@funul.io', result, 'wassup dude')
-smtpserver.close()
+
+
+def sendMail(items,price):
+    text = 'You purchased ' + ', '.join(items) + ' for ' + str(price)
+    smtpserver.sendmail('drew.meyers@funul.io', result, text)
+    smtpserver.close()
