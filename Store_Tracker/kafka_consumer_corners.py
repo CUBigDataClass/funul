@@ -5,6 +5,7 @@ import statistics
 import json
 import math
 import sys
+import deal_email
 from queue import *
 
 
@@ -79,6 +80,10 @@ for msg in consumer:
     print(closest_pi, data['epoch_time'])
 
     if closest_pi != last_sent_pi:
+
+        if closest_pi == 'pi_3':
+            sendDealEmail()
+
         last_sent_pi = closest_pi
 
         # add processed data to database
