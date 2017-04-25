@@ -18,7 +18,7 @@ SoftwareSerial softSerial(2, 3); //RX, TX
 RFID nano; //Create instance
 
 #define BUZZER1 9
-#define BUZZER1 0 //For testing quietly
+//#define BUZZER1 0 //For testing quietly
 #define BUZZER2 10
 #define MAX_NUMBER_OF_ITEMS 100
 
@@ -48,7 +48,7 @@ void setup()
 
   nano.setRegion(REGION_NORTHAMERICA); //Set to North America
 
-  nano.setReadPower(500); //5.00 dBm. Higher values may cause USB port to brown out
+  nano.setReadPower(2500); //5.00 dBm. Higher values may cause USB port to brown out
   //Max Read TX Power is 27.00 dBm and may cause temperature-limit throttling
     Serial.println("... Done Initializing");
 
@@ -84,7 +84,7 @@ void loop()
   while (0 != RESPONSE_SUCCESS)//RESPONSE_IS_TAGFOUND)
   {
     myEPClength = sizeof(new_ECP_arr); //Length of EPC is modified each time .readTagEPC is called
-    responseType = nano.readTagEPC(new_ECP_arr, myEPClength, 1500); //Scan for a new tag up to 500ms
+    responseType = nano.readTagEPC(new_ECP_arr, myEPClength, 2500); //Scan for a new tag up to 500ms
     if (responseType == RESPONSE_SUCCESS) {
       if (insert_into_array_if_unq(number_of_unq_EPC) == true) {
         //this means the EPC is unq. and has been added to the global array
@@ -96,6 +96,13 @@ void loop()
             Serial.print(F(" "));
           }
         Serial.println(F("]")); 
+        tone(BUZZER1, 2093, 150); //C
+        delay(150);
+        tone(BUZZER1, 2349, 150); //D
+        delay(150);
+        tone(BUZZER1, 2637, 150); //E
+        delay(150);
+
         responseType = 0;
         number_of_unq_EPC++;
       }     
