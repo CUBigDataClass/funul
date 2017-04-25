@@ -3,6 +3,8 @@ import couchdb
 import serial
 import time
 import funul_email
+from texttable import Texttable
+from tabulate import tabulate
 
 COUCHDB_SERVER = 'http://52.14.61.109:5984'
 
@@ -14,15 +16,17 @@ arduinoSerialData=serial.Serial('/dev/ttyUSB0',115200)
 
 last_change = 0
 items = []
-
+table = [['Items','Price']]
 total = 0.0
 last_time_check = time.time()
 
-def fun(doc,data,items_arr):
+
+def fun(doc,data,items_arr,print_table):
 	#print(doc['gid'])
 	if data == doc['gid']:
 		#total += doc['price']
 		#print("found")
+		print_table.append([doc['item_Name'],doc['price']])
 		items_arr.append(doc['item_Name'])
 		return(doc['price'])
 	else:
@@ -41,7 +45,7 @@ while 1:
 #		print("before for")
 	#	print("data from dev ",myData)
 		for row in db:
-			price =  fun(db.get(row),myData,items)
+			price =  fun(db.get(row),myData,items,table)
 			if (price != 0):
 				last_change = 0
 				last_time_check = time.time()		
@@ -49,12 +53,21 @@ while 1:
 		#print(myData)
 			if (price != 0):
 				print(chr(27) + "[2J")
-				print('\n'.join(items))
-				print("Total cost: " + total)
+				t = Texttable()
+				t.add_rows(table)
+				cur_table = t.draw()
+				print(cur_table)
+				#print('\n'.join(items))
+				print("Total cost: " + str(total))
 		if (total == 0):
 			print(myData)
 	if (time.time() - last_time_check > 30):
-		funul_email.sendMail(items,total)
+		print(chr(27)+"[2J")
+		print("Thank you for shopping with us")
+		table = [['Items','Price']]
+		cur_table.replace(","," ")
+		#send_table = tablulate(table)
+		funul_email.sendMail(table,total)
 		last_time_check = 9999999999999999999
 		items = []
 		total = 0
