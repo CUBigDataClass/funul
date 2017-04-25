@@ -13,16 +13,18 @@ TOPIC = 'bluetooth_readings' # topic to be used for all trilateration procedures
 GROUP_ID = 'blah'
 COUCHDB_SERVER = 'http://52.14.61.109:5984'
 
+last_sent_pi = None
+
 # start new reading every X seconds
 last_window_epoch = time.time()
 first_reading_done = False
 readings = {}
 
 pi_locations = {
-    'pi_1': (1,0),
-    'pi_2': (1,1),
-    'pi_3': (0,1),
-    'pi_4': (0,0)
+    'pi_1': (1,1),
+    'pi_2': (1,0),
+    'pi_3': (0,0),
+    'pi_4': (0,1)
 }
 
 
@@ -76,13 +78,16 @@ for msg in consumer:
 
     print(closest_pi, data['epoch_time'])
 
-    # add processed data to database
-    new_doc = {
-        'location_x': pi_locations[closest_pi][0],
-        'location_y': pi_locations[closest_pi][1],
-        'epoch_time': last_window_epoch
-    }
-    db.save(new_doc)
+    if closest_pi != last_sent_pi:
+        last_sent_pi = closest_pi
+
+        # add processed data to database
+        new_doc = {
+            'location_x': pi_locations[closest_pi][0],
+            'location_y': pi_locations[closest_pi][1],
+            'epoch_time': last_window_epoch
+        }
+        db.save(new_doc)
 
     sys.stdout.flush()
 
