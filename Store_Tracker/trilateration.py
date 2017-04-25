@@ -86,8 +86,7 @@ def get_polygon_center(points):
 def do_trilateration(circle_list):
     inner_points = []
     for p in get_all_intersecting_points(circle_list):
-        if is_contained_in_circles(p, circle_list):
-            inner_points.append(p) 
+        inner_points.append(p) 
     
     if len(inner_points) == 0:
         print("no intersecting points")

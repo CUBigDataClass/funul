@@ -16,7 +16,6 @@ GROUP_ID = 'blah'
 TIME_WINDOW = 5 # in seconds
 COUCHDB_SERVER = 'http://52.14.61.109:5984'
 
-
 # start new reading every X seconds
 last_window_epoch = time.time()
 first_reading_done = False
@@ -26,8 +25,8 @@ readings = {}
 # we are manually entering them here for demo purposes. it is time-consuming to manually
 # change these values on multiple devices, especially on the school network where we cannot
 # give them static ips (which also makes automation difficult)
-MAX_X = 7.982
-MAX_Y = 7.98
+MAX_X = 6.1976
+MAX_Y = 10.2616
 
 pi_locations = {
     'pi_1': trilateration.point(0.0,0.0),
@@ -42,7 +41,6 @@ db = server['processed_ble']
 
 consumer = KafkaConsumer(TOPIC, bootstrap_servers=SERVERS, auto_offset_reset='earliest', group_id=GROUP_ID)
 for msg in consumer:
-    continue
     data = json.loads(msg[6].decode('utf-8'))
 
     # only track one beacon
@@ -76,7 +74,7 @@ for msg in consumer:
             print(list(readings[pi_id].queue))
             median_rssi = statistics.mean(list(readings[pi_id].queue))
             # the following formula found from trendline in excel
-            distance = min(max(0.0052*math.abs(median_rssi)**2-0.2365*math.abs(median_rssi)+2.7178,0), min(MAX_X, MAX_Y))
+            distance = max(0.0052*math.fabs(median_rssi)**2-0.2365*math.fabs(median_rssi)+2.7178,0)
             pi_distances.append((pi_id, distance))
         pi_distances.sort(key=lambda x: x[1])
 
@@ -91,9 +89,9 @@ for msg in consumer:
         computed_locations_y = []
         for pi_combo in itertools.combinations(pi_distances, 3):
             circle_list = [
-                trilateration.circle(pi_locations[pi_distances[0][0]], pi_distances[0][1]),
-                trilateration.circle(pi_locations[pi_distances[1][0]], pi_distances[1][1]),
-                trilateration.circle(pi_locations[pi_distances[2][0]], pi_distances[2][1])]
+                trilateration.circle(pi_locations[pi_combo[0][0]], pi_combo[0][1]),
+                trilateration.circle(pi_locations[pi_combo[1][0]], pi_combo[1][1]),
+                trilateration.circle(pi_locations[pi_combo[2][0]], pi_combo[2][1])]
             computed_location = trilateration.do_trilateration(circle_list)
 
             # do not consider pis without intersecting points
@@ -112,8 +110,8 @@ for msg in consumer:
         median_y = statistics.median(computed_locations_y)
 
         # normalize these results by dividing by x difference and y difference
-        normalized_x = median_x / MAX_X
-        normalized_y = median_y / MAX_Y
+        normalized_x = max(min(median_x / MAX_X, 1), 0)
+        normalized_y = max(min(median_y / MAX_Y, 1), 0)
 
         # add processed data to database
         new_doc = {

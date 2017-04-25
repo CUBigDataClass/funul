@@ -18,5 +18,9 @@ db = server['local_ip']
 
 for change in db.changes(feed='continuous', since='now'):
     print(change)
+
+    if 'id' not in change:
+        continue
+    
     doc = db.get(change['id'])
     print(doc)
