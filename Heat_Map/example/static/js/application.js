@@ -19,7 +19,6 @@ function setup() {
     console.log("height is: ", height, "width is: ", width);
     heatmap = h337.create({
         container: document.getElementById('canvas'),
-        // a waterdrop gradient ;-)
         gradient: { .1: "rgba(150, 251, 196, 1)", 0.5: "rgba(254, 225, 64, 1)", .95: 'rgba(250, 112, 154, 1)'},
         maxOpacity: 1,
         radius: 10,
