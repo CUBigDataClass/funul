@@ -72,23 +72,13 @@
   });
 
   function logUserSession(user) {
-    var dbRef = firebase.database().ref("log/" + guid());
+    var dbRef = firebase.database().ref("log");
     var eventTime = new Date();
-    dbRef.set({
+    dbRef.push().set({
       email: user.email,
       EventTime : eventTime.toString(),
       uid: user.uid
     });
-  }
-
-  function guid() {
-    function s4() {
-      return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-    }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-      s4() + '-' + s4() + s4() + s4();
   }
 
 }());
