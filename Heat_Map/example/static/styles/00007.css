@@ -34,7 +34,9 @@ body {
 }
 .heat-map {
   /*background: rgba(255, 255, 255, 0.5);*/
-  background-image: url("/static/img/stage.jpg")
+  background-image: url("/static/img/stage.jpg");
+  background-repeat: no-repeat;
+  background-position: center; 
 }
 .canvas {
   position: relative;

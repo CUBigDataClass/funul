@@ -20,7 +20,7 @@ function setup() {
     heatmap = h337.create({
         container: document.getElementById('canvas'),
         gradient: { .1: "rgba(67, 67, 67, 1)", 0.5: "rgba(0, 0, 0, 1)", .95: 'rgba(89, 97, 100, 1)'},
-        maxOpacity: 1,
+        maxOpacity: .9,
         radius: 10,
         blur: .90
     });
