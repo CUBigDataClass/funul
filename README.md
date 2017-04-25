@@ -1,6 +1,6 @@
+![Funul.io logo](/Heat_Map/example/static/img/logo_black-01.png)
 
 ATLS 4213 - funul.io (Formerly known as Phat-Stax)
-![Funul.io logo](/Heat_Map/example/static/img/logo_black-01.png)
 ================
 
 Heat-Map indoor activity and provide wireless checkout.
