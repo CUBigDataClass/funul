@@ -20,7 +20,7 @@ def background_thread():
     """Example of how to send server generated events to clients."""
     count = 0
     while True:
-        socketio.sleep(.1)
+        socketio.sleep(1)
     	x = random()
 	y = random()
 

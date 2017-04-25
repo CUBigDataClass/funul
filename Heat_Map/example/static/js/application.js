@@ -19,7 +19,7 @@ function setup() {
     console.log("width is: ", width, "height is: ", height);
     heatmap = h337.create({
         container: document.getElementById('canvas'),
-        gradient: { .1: "rgba(150, 251, 196, 1)", 0.5: "rgba(254, 225, 64, 1)", .95: 'rgba(250, 112, 154, 1)'},
+        gradient: { .1: "rgba(67, 67, 67, 1)", 0.5: "rgba(0, 0, 0, 1)", .95: 'rgba(89, 97, 100, 1)'},
         maxOpacity: 1,
         radius: 10,
         blur: .90
@@ -96,7 +96,7 @@ function load_socket() {
 
     });
     socket.on('newnumber', function (msg) {
-        console.log("AAA Received number " + ", " + msg.x + ", " + msg.y);
+        console.log("Received number " + ", " + msg.x + ", " + msg.y);
         update_heat_map(msg)
     });
 
