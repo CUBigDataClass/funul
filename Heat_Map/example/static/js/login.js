@@ -47,9 +47,10 @@
     console.log("Signed out");
 	});
 
+  // detect sign in/sign out
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      // User is signed in.
+      // User is signed in
       var email = user.email;
       var isAnonymous = user.isAnonymous;
       var uid = user.uid;
@@ -60,12 +61,34 @@
       firebase.database().ref("users").set({
         email: email
       });
+      logUserSession(user);
     } else {
+      //User is signed out
       console.log("Auth state change - not logged in");
       btnNavLogin.classList.remove('hide');
       btnSignOut.classList.add('hide');
       splashDiv.classList.remove("hide");
     }
   });
+
+  function logUserSession(user) {
+    var dbRef = firebase.database().ref("log/" + guid());
+    var eventTime = new Date();
+    dbRef.set({
+      email: user.email,
+      EventTime : eventTime.toString(),
+      uid: user.uid
+    });
+  }
+
+  function guid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+  }
 
 }());
