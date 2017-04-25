@@ -44,6 +44,7 @@
   //sign out
 	btnSignOut.addEventListener('click', e => {
 		firebase.auth().signOut();
+    console.log("Signed out");
 	});
 
   firebase.auth().onAuthStateChanged(function(user) {
@@ -55,7 +56,12 @@
       btnNavLogin.classList.add('hide');
       btnSignOut.classList.remove('hide');
       splashDiv.classList.add("hide");
+      console.log("Auth state change - ", email, " is logged in");
+      firebase.database().ref("users").set({
+        email: email
+      });
     } else {
+      console.log("Auth state change - not logged in");
       btnNavLogin.classList.remove('hide');
       btnSignOut.classList.add('hide');
       splashDiv.classList.remove("hide");

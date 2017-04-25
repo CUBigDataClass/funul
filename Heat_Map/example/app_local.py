@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, async_mode=async_mode)
 thread = None
 Bootstrap(app)
-'''
+
 def background_thread():
     """Example of how to send server generated events to clients."""
     count = 0
@@ -46,7 +46,7 @@ def background_thread():
 		socketio.emit('newnumber',{'x':x_loc,'y':y_loc},namespace='/test')
 		#if not thread_stop_event.isSet():
 		#	break
-
+'''
 #url_for('static', filename='style.css')
 @app.route('/')
 def index():
@@ -73,4 +73,4 @@ def test_disconnect():
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True, host='0.0.0.0', port = 80)
+    socketio.run(app, debug=True)

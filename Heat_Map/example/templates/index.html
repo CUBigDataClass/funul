@@ -6,21 +6,23 @@
 
     <title>funul.io</title>
 
-    <!-- Latest compiled and minified CSS -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="static/styles/style.css" rel="stylesheet">
+    <!-- Local Styles -->
+    <link href="static/styles/00009.css" rel="stylesheet">
   </head>
 
   <body onLoad="load_socket()">
+    <!-- Brandon's stuff, I really don't know -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
     <script src="static/js/application.js"></script>
     <script src="/static/js/heatmap.js"></script>
 
+    <!-- Nav -->
     <nav class="navbar navbar-inverse fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -47,7 +49,7 @@
     </nav>
 
     <!-- Splash Page -->
-    <div class="container" id="splash">
+    <div class="container text" id="splash">
       <div class="starter-template">
         <h1>funul.io</h1>
         <p class="lead">Trianglation of Bluetooth Divices</p>
@@ -58,17 +60,17 @@
     </div>
 
     <!-- HeatMap -->
-    <div class="container">
-      <h1>Current Heatmap</h1>
+    <div class="container text">
+      <h1>Current Position</h1>
       <div class="heat-map" id="heat-map">
         <div id="canvas" class="canvas">
-          <canvas width="958" height="877"></canvas>
+          <canvas height="800"></canvas>
         </div>
       </div>
     </div>
 
     <!-- About -->
-    <div class="container" id="about">
+    <div class="container text" id="about">
       <div class="col-md-6">
         <h1>Find Your Customers</h1>
         <p>In today's commerce environment it is more and more important everyday to know where your customers are. Knowing where customers are spending the most time in your store can help determine an optimal layout to maximize revenue. Funul.io gives you insight on where your customers are spending the most time in your store by following their phone's bluetooth signal and mapping their movements.</p>
@@ -83,15 +85,12 @@
     <!-- Login Modal -->
     <div id="myModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
-
-        <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Login</h4>
           </div>
-          <div class="modal-body">
-            <form class="login_form">
+          <div class="modal-body login_form">
               <div class="form-group">
                 <label for="email">Email address:</label>
                 <input type="email" class="form-control" id="txtEmail">
@@ -102,7 +101,6 @@
               </div>
               <button type="submit" class="btn btn-info" id="btnSignUp">Sign Up</button>
               <button type="submit" class="btn btn-success" id="btnLogin">Login</button>
-            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -112,21 +110,28 @@
       </div>
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Footer -->
+    <footer>
+      <div class="bg-2">
+        <div class="container">
+        <h4><center>Thanks for checking us out.</center></h4>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <!-- AJAX -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-database.js"></script>
+    <!-- Login Script -->
     <script src="static/js/login.js"></script>
-
-    <!-- HeatMap -->
-
   </body>
 </html>
