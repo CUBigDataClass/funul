@@ -16,7 +16,7 @@ function setup() {
     // height = (+window.getComputedStyle(document.body).height.replace(/px/, ''));
     width = document.getElementById('heat-map').offsetWidth;
     height = document.getElementById('heat-map').offsetHeight;
-    console.log("height is: ", height, "width is: ", width);
+    console.log("width is: ", width, "height is: ", height);
     heatmap = h337.create({
         container: document.getElementById('canvas'),
         gradient: { .1: "rgba(150, 251, 196, 1)", 0.5: "rgba(254, 225, 64, 1)", .95: 'rgba(250, 112, 154, 1)'},

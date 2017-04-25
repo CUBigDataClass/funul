@@ -6,21 +6,23 @@
 
     <title>funul.io</title>
 
-    <!-- Latest compiled and minified CSS -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Local Styles -->
     <link href="static/styles/00005.css" rel="stylesheet">
   </head>
 
   <body onLoad="load_socket()">
+    <!-- Brandon's stuff, I really don't know -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
     <script src="static/js/application.js"></script>
     <script src="/static/js/heatmap.js"></script>
 
+    <!-- Nav -->
     <nav class="navbar navbar-inverse fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -83,8 +85,6 @@
     <!-- Login Modal -->
     <div id="myModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
-
-        <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -114,26 +114,24 @@
     <footer>
       <div class="bg-2">
         <div class="container">
-        <h4><center>Thanks for check us out.</center></h4>
+        <h4><center>Thanks for checking us out.</center></h4>
         </div>
       </div>
     </footer>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <!-- AJAX -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-database.js"></script>
+    <!-- Login Script -->
     <script src="static/js/login.js"></script>
-
-    <!-- HeatMap -->
-
   </body>
 </html>
