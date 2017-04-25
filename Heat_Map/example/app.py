@@ -39,7 +39,7 @@ def background_thread():
 	db = server['processed_ble']
 	for change in db.changes(feed = 'continuous', since='now'):
 		if 'id' not in change:
-			continue:
+			continue
 
                 doc = db.get(change['id'])
 		print("here")
