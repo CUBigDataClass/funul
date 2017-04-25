@@ -1,6 +1,6 @@
 body {
-  /*background-image: linear-gradient(90deg, #84fab0 0%, #8fd3f4 100%);*/
-  background-image: linear-gradient(to right, #434343 0%, black 100%);
+  background-image: linear-gradient(90deg, #84fab0 0%, #8fd3f4 100%);
+  /*background-image: linear-gradient(to top, #434343 0%, black 100%);*/
   font: 20px Montserrat, sans-serif;
 }
 .navbar {
@@ -24,9 +24,6 @@ body {
 #logo {
   height: 32px;
 }
-.form-group {
-
-}
 .piagram {
   height: 40%;
   width: 40%;
@@ -42,4 +39,11 @@ body {
   position: relative;
   left: 0px;
   top: 0px;
+}
+.text {
+  /*color: #FFFFFF;*/
+}
+.bg-2 {
+  background-color: white;
+  color: black;
 }
