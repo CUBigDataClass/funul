@@ -1,5 +1,6 @@
 (function() {
   // Initialize Firebase
+  console.log("In login.js");
   const config = {
     apiKey: "AIzaSyBpkRAES6x70xhygiQAg_lN6dv2nlCAw0k",
     authDomain: "funul-8cd90.firebaseapp.com",
@@ -44,9 +45,11 @@
   //sign out
 	btnSignOut.addEventListener('click', e => {
 		firebase.auth().signOut();
+    console.log("Signed out");
 	});
 
   firebase.auth().onAuthStateChanged(function(user) {
+    console.log("Auth State Change");
     if (user) {
       // User is signed in.
       var email = user.email;
@@ -55,7 +58,12 @@
       btnNavLogin.classList.add('hide');
       btnSignOut.classList.remove('hide');
       splashDiv.classList.add("hide");
+      console.log("Auth state change - ", email, " is logged in");
+      firebase.database().ref("users").set({
+        email: email
+      });
     } else {
+      console.log("Auth state change - not logged in");
       btnNavLogin.classList.remove('hide');
       btnSignOut.classList.add('hide');
       splashDiv.classList.remove("hide");
