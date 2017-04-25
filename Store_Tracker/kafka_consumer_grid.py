@@ -36,6 +36,18 @@ pi_locations = {
     'pi_4': trilateration.point(MAX_X,0)
 }
 
+# decompose this rectangle into a grid with test points at the center of each grid square
+NUM_X = 4
+NUM_Y = 4
+
+test_points = []
+for i in range(NUM_X):
+    x = (MAX_X/NUM_X)*(i+0.5)
+    for j in range(NUM_Y):
+        y = (MAX_Y/NUM_Y)*(j+0.5)
+
+        grid_points.append(x,y)
+
 # processed data will be added to separate database
 server = couchdb.client.Server(COUCHDB_SERVER)
 db = server['processed_ble']
@@ -86,34 +98,28 @@ for msg in consumer:
         if len(pi_distances) < 3:
             continue
 
-        # process on each combination of three pis
-        computed_locations_x = []
-        computed_locations_y = []
-        for pi_combo in itertools.combinations(pi_distances, 3):
-            circle_list = [
-                trilateration.circle(pi_locations[pi_distances[0][0]], pi_distances[0][1]),
-                trilateration.circle(pi_locations[pi_distances[1][0]], pi_distances[1][1]),
-                trilateration.circle(pi_locations[pi_distances[2][0]], pi_distances[2][1])]
-            computed_location = trilateration.do_trilateration(circle_list)
-
-            # do not consider pis without intersecting points
-            if computed_location.x != 0:
-                computed_locations_x.append(computed_location.x)
-            if computed_location.y != 0:
-                computed_locations_y.append(computed_location.y)
+        # iterate over test points and find point with smallest error
+        min_error = float('Inf')
+        best_test_point = None
+        for test_point in test_points:
+            error = 0
+            for pi_distance in pi_distances:
+                pi_location = pi_locations[pi_distance[0]]
+                distance_diff =  math.sqrt((test_point[0]-pi_location[0])**2+(test_point[1]-pi_location[1])**2)
+                error += (distance-distance_diff)**2
+            if error < min_error:
+                min_error = error
+                best_test_point = test_point
 
 
-        # ignore data if no intersecting points are found
-        if len(computed_locations_x) == 0 or len(computed_locations_y) == 0:
+        if best_test_point is None:
+            print('No valid test point')
             continue
 
-        # take medians of computed locations
-        median_x = statistics.median(computed_locations_x)
-        median_y = statistics.median(computed_locations_y)
 
         # normalize these results by dividing by x difference and y difference
-        normalized_x = median_x / MAX_X
-        normalized_y = median_y / MAX_Y
+        normalized_x = best_test_point[0] / MAX_X
+        normalized_y = best_test_point[1] / MAX_Y
 
         # add processed data to database
         new_doc = {

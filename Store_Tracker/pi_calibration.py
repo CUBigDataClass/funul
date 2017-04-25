@@ -17,12 +17,12 @@ COUCHDB_SERVER = 'http://52.14.61.109:5984'
 
 # hardcoded pi id--put in id of pi being calibrated here
 PI_TO_TEST = 'pi_1'
-DISTANCE = '1.524m'
+DISTANCE = '15.240m'
 
-file_rssi_median = open('calibration_median_rssi_' + PI_TO_TEST + '_' + DISTANCE + '.csv', 'w')
-file_rssi_raw = open('calibration_raw_rssi_' + PI_TO_TEST + '_' + DISTANCE + '.csv', 'w')
-file_distance = open('calibration_distance_' + PI_TO_TEST + '_' + DISTANCE + '.csv', 'w')
-file_epoch = open('calibration_epoch_' + PI_TO_TEST + '_' + DISTANCE + '.csv', 'w')
+file_rssi_median = open('nano_calibration_median_rssi_' + PI_TO_TEST + '_' + DISTANCE + '.csv', 'w')
+file_rssi_raw = open('nano_calibration_raw_rssi_' + PI_TO_TEST + '_' + DISTANCE + '.csv', 'w')
+file_distance = open('nano_calibration_distance_' + PI_TO_TEST + '_' + DISTANCE + '.csv', 'w')
+file_epoch = open('nano_calibration_epoch_' + PI_TO_TEST + '_' + DISTANCE + '.csv', 'w')
 
 # start new reading every X seconds
 last_window_epoch = time.time()
@@ -67,7 +67,7 @@ for msg in consumer:
     print(median_rssi, distance)
 
     file_rssi_median.write(str(median_rssi) + ',')
-    file_rssi_raw.write(str(data['RSSI']))
+    file_rssi_raw.write(str(data['RSSI']) + ',')
     file_distance.write(str(distance) + ',')
     file_epoch.write(str(data['epoch_time']) +  ',')
 
