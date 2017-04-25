@@ -1,5 +1,5 @@
 # Front End Documentation
-The front end of Funul.io is hosted on a t2.micro EC2 instance of AWS running a flask server.
+The front end of Funul.io is hosted on a t2.micro EC2 instance of AWS running a flask server. Currently at peak times CPU utilization is at around 5%.
 
 ## Dependencies
 All of the dependencies can be found in requirements.txt, and you should be able to install all of the dependencies by running
