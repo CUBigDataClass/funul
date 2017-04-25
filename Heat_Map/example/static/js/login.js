@@ -10,7 +10,7 @@
   };
   firebase.initializeApp(config);
 
-  const txtEmail = document.getElementById('txtEmail');
+ 	const txtEmail = document.getElementById('txtEmail');
 	const txtPassword = document.getElementById('txtPassword');
 	const btnLogin = document.getElementById('btnLogin');
 	const btnSignUp = document.getElementById('btnSignUp');
@@ -58,9 +58,6 @@
       btnSignOut.classList.remove('hide');
       splashDiv.classList.add("hide");
       console.log("Auth state change - ", email, " is logged in");
-      firebase.database().ref("users").set({
-        email: email
-      });
       logUserSession(user);
     } else {
       //User is signed out
@@ -71,7 +68,7 @@
     }
   });
 
-  function logUserSession(user) {
+	function logUserSession(user) {
     var dbRef = firebase.database().ref("log");
     var eventTime = new Date();
     dbRef.push().set({
@@ -79,6 +76,9 @@
       EventTime : eventTime.toString(),
       uid: user.uid
     });
+		firebase.database().ref("users").set({
+			email: user.email
+		});
   }
 
 }());
