@@ -3,6 +3,7 @@ import couchdb
 import serial
 import time
 import funul_email
+
 from texttable import Texttable
 from tabulate import tabulate
 
@@ -61,16 +62,19 @@ while 1:
 				print("Total cost: " + str(total))
 		if (total == 0):
 			print(myData)
-	if (time.time() - last_time_check > 30):
+	if (time.time() - last_time_check > 10 and len(items)!=0):
 		print(chr(27)+"[2J")
 		print("Thank you for shopping with us")
 		table = [['Items','Price']]
 		cur_table.replace(","," ")
 		#send_table = tablulate(table)
-		funul_email.sendMail(table,total)
+		funul_email.sendMail(items,total)
 		last_time_check = 9999999999999999999
 		items = []
 		total = 0
+		time.sleep(3)
+		print(chr(27)+"[2J")
+		print("Hello, Please Scan Items")
 		#print(myData)
 
 
