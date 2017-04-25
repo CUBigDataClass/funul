@@ -1,6 +1,5 @@
 (function() {
   // Initialize Firebase
-  console.log("In login.js");
   const config = {
     apiKey: "AIzaSyBpkRAES6x70xhygiQAg_lN6dv2nlCAw0k",
     authDomain: "funul-8cd90.firebaseapp.com",
@@ -49,7 +48,6 @@
 	});
 
   firebase.auth().onAuthStateChanged(function(user) {
-    console.log("Auth State Change");
     if (user) {
       // User is signed in.
       var email = user.email;

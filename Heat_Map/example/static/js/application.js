@@ -42,15 +42,22 @@ function setup() {
 function update_heat_map(msg) {
         var max = 100;
         var min = 0;
-        var t = [];
+        var data = {
+            max: 1,
+            min: 0,
+            data: [
+                0
+            ]
+        };
 
         var x_serv = (msg.x * width) >> 0;
         var y_serv = (msg.y * height) >> 0;
         console.log("x is ", x_serv, "y is ", y_serv);
         var c = 100;
-        var r = (50) >> 0;
+        var r = (500) >> 0;
 
         // add the datapoint to heatmap instance
+        heatmap.setData(data);
         heatmap.addData({ x: x_serv, y: y_serv, value: c, radius: r });
     /*
     x = msg.x
@@ -89,7 +96,7 @@ function load_socket() {
 
     });
     socket.on('newnumber', function (msg) {
-        console.log("Received number " + ", " + msg.x + ", " + msg.y);
+        console.log("AAA Received number " + ", " + msg.x + ", " + msg.y);
         update_heat_map(msg)
     });
 
