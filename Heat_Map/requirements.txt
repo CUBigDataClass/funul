@@ -11,3 +11,4 @@ flask
 flask-socketio
 couchdb
 flask_bootstrap
+python-firebase
