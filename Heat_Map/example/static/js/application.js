@@ -16,10 +16,10 @@ function setup() {
     // height = (+window.getComputedStyle(document.body).height.replace(/px/, ''));
     width = document.getElementById('heat-map').offsetWidth;
     height = document.getElementById('heat-map').offsetHeight;
-    console.log("height is: ", height, "width is: ", width);
+    console.log("width is: ", width, "height is: ", height);
     heatmap = h337.create({
         container: document.getElementById('canvas'),
-        gradient: { .1: "rgba(150, 251, 196, 1)", 0.5: "rgba(254, 225, 64, 1)", .95: 'rgba(250, 112, 154, 1)'},
+        gradient: { .1: "rgba(67, 67, 67, 1)", 0.5: "rgba(0, 0, 0, 1)", .95: 'rgba(89, 97, 100, 1)'},
         maxOpacity: 1,
         radius: 10,
         blur: .90
@@ -42,15 +42,22 @@ function setup() {
 function update_heat_map(msg) {
         var max = 100;
         var min = 0;
-        var t = [];
+        var data = {
+            max: 1,
+            min: 0,
+            data: [
+                0
+            ]
+        };
 
         var x_serv = (msg.x * width) >> 0;
         var y_serv = (msg.y * height) >> 0;
         console.log("x is ", x_serv, "y is ", y_serv);
         var c = 100;
-        var r = (50) >> 0;
+        var r = (500) >> 0;
 
         // add the datapoint to heatmap instance
+        heatmap.setData(data);
         heatmap.addData({ x: x_serv, y: y_serv, value: c, radius: r });
     /*
     x = msg.x
