@@ -19,10 +19,10 @@ function setup() {
     console.log("width is: ", width, "height is: ", height);
     heatmap = h337.create({
         container: document.getElementById('canvas'),
-        gradient: { .1: "rgba(67, 67, 67, 1)", 0.5: "rgba(0, 0, 0, 1)", .95: 'rgba(89, 97, 100, 1)'},
+        gradient: { .1: "rgba(146, 254, 157, 1)", 0.4: "rgba(0, 201, 255, .5)"},
         maxOpacity: .9,
         radius: 10,
-        blur: .90
+        blur: 0.1
     });
 
 
