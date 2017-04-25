@@ -9,14 +9,14 @@ when in `/Heat_Map/`.
 
 ## Servers
 ### Local Development Server
-To run a local instance navigate to `Heat_Map/example` and run 
+To run a local instance navigate to `/Heat_Map/example/` and run 
 
     sudo python app_local.py
     
-`app_local.py` is very similar to the `app.py` that needs to be run for production, but has a random number generator to feed data as opposed to receiving data from CouchDB.
+`app_local.py` is very similar to the `app.py` that needs to be run for production, but has a random number generator to feed data as opposed to receiving data from CouchDB as well as not porting to our AWS server. The local server hosts at `http://localhost:5000/`
 
 ### Production Server
-To start a production server navigate to `Heat_Map/example` and run 
+To start a production server navigate to `/Heat_Map/example/` and run 
 
     sudo python app.py &
 which will start the flask server in the background. To kill the server, you'll need to run 
