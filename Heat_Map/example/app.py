@@ -29,7 +29,7 @@ def background_thread():
                       {'x':x, 'y':y},
                       namespace='/test')
 '''
-COUCHDB_SERVER = 'http://52.14.61.109:5984'
+COUCHDB_SERVER = 'http://13.58.9.233:5984'
 def background_thread():
     """Example of how to send server generated events to clients."""
 
