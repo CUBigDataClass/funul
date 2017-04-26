@@ -10,7 +10,7 @@
   };
   firebase.initializeApp(config);
 
-  const txtEmail = document.getElementById('txtEmail');
+ 	const txtEmail = document.getElementById('txtEmail');
 	const txtPassword = document.getElementById('txtPassword');
 	const btnLogin = document.getElementById('btnLogin');
 	const btnSignUp = document.getElementById('btnSignUp');
@@ -47,9 +47,10 @@
     console.log("Signed out");
 	});
 
+  // detect sign in/sign out
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      // User is signed in.
+      // User is signed in
       var email = user.email;
       var isAnonymous = user.isAnonymous;
       var uid = user.uid;
@@ -57,15 +58,27 @@
       btnSignOut.classList.remove('hide');
       splashDiv.classList.add("hide");
       console.log("Auth state change - ", email, " is logged in");
-      firebase.database().ref("users").set({
-        email: email
-      });
+      logUserSession(user);
     } else {
+      //User is signed out
       console.log("Auth state change - not logged in");
       btnNavLogin.classList.remove('hide');
       btnSignOut.classList.add('hide');
       splashDiv.classList.remove("hide");
     }
   });
+
+	function logUserSession(user) {
+    var dbRef = firebase.database().ref("log");
+    var eventTime = new Date();
+    dbRef.push().set({
+      email: user.email,
+      EventTime : eventTime.toString(),
+      uid: user.uid
+    });
+		firebase.database().ref("users").set({
+			email: user.email
+		});
+  }
 
 }());

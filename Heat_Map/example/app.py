@@ -38,7 +38,10 @@ def background_thread():
 	server.resource.credentials = ('admin', 'drewmeyers#1')
 	db = server['processed_ble']
 	for change in db.changes(feed = 'continuous', since='now'):
-		doc = db.get(change['id'])
+		if 'id' not in change:
+			continue
+
+                doc = db.get(change['id'])
 		print("here")
 		x_loc = doc['location_x']
 		y_loc = doc['location_y']
