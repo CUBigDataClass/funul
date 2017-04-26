@@ -10,7 +10,7 @@ import itertools
 from queue import *
 
 
-COUCHDB_SERVER = 'http://52.14.61.109:5984'
+COUCHDB_SERVER = 'http://13.58.9.233:5984'
 
 # processed data will be added to separate database
 server = couchdb.client.Server(COUCHDB_SERVER)

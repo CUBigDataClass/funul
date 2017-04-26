@@ -13,7 +13,7 @@ from queue import *
 SERVERS = ['localhost:9092'] # kafka server list
 TOPIC = 'bluetooth_readings' # topic to be used for all trilateration procedures
 GROUP_ID = 'blah'
-COUCHDB_SERVER = 'http://52.14.61.109:5984'
+COUCHDB_SERVER = 'http://13.58.9.233:5984'
 
 # processed data will be added to separate database
 server = couchdb.client.Server(COUCHDB_SERVER)
@@ -21,6 +21,6 @@ db = server['processed_ble']
 
 consumer = KafkaConsumer(TOPIC, bootstrap_servers=SERVERS, auto_offset_reset='earliest', group_id=GROUP_ID)
 for msg in consumer:
-    print('cleared')
+    print('cle')
 
 consumer.close()

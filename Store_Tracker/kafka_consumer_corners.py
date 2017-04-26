@@ -12,7 +12,7 @@ from queue import *
 SERVERS = ['localhost:9092'] # kafka server list
 TOPIC = 'bluetooth_readings' # topic to be used for all trilateration procedures
 GROUP_ID = 'blah'
-COUCHDB_SERVER = 'http://52.53.196.80:5984'
+COUCHDB_SERVER = 'http://13.58.9.233:5984'
 
 last_sent_pi = None
 

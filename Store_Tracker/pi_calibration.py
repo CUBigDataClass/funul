@@ -12,7 +12,7 @@ SERVERS = ['localhost:9092'] # kafka server list
 TOPIC = 'bluetooth_readings' # topic to be used for all trilateration procedures
 GROUP_ID = 'blah'
 TX_POWER = -63 # power received by receiver at distance of 1m
-COUCHDB_SERVER = 'http://52.14.61.109:5984'
+COUCHDB_SERVER = 'http://13.58.9.233:5984'
 
 
 # hardcoded pi id--put in id of pi being calibrated here
