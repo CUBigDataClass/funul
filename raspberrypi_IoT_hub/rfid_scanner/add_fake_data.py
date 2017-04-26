@@ -71,7 +71,7 @@ db.save({
 	'gid':'E2 00 51 86 01 07 01 88 21 00 3A 92',
 	'uid':'0000000',
 	'status':'II',
-	'item_Name':'SNAKEOIL,
+	'item_Name':'SNAKEOIL',
 	'date_sold':'00/00/00',
 	'sold_to':'creg'})
 
