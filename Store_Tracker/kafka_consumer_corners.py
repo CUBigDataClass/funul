@@ -28,21 +28,25 @@ pi_locations = {
     'pi_4': (0,1)
 }
 
+only_once = 0
+every_ten = 0
 
 # processed data will be added to separate database
 server = couchdb.client.Server(COUCHDB_SERVER)
 db = server['processed_ble']
 
-last_nearest_pis = Queue(maxsize=5)
+last_nearest_pis = Queue(maxsize=15)
 
 consumer = KafkaConsumer(TOPIC, bootstrap_servers=SERVERS, auto_offset_reset='earliest', group_id=GROUP_ID)
 for msg in consumer:
     data = json.loads(msg[6].decode('utf-8'))
-
+ 
     # only track one beacon
     if data['beacon_id'] != 'rb_nano_1':
         continue
 
+    every_ten += 1
+    
     # append rssi reading to list if list for pi id exists, otherwise create one
     if data['pi_id'] in readings:
         if readings[data['pi_id']].full():
@@ -55,7 +59,6 @@ for msg in consumer:
     # do actual processing    
     smallest_rssi = 200
     closest_pi = None
-
     for pi_id in readings:
         median_rssi = math.fabs(statistics.mean(list(readings[pi_id].queue)))
         if median_rssi < smallest_rssi:
@@ -68,6 +71,9 @@ for msg in consumer:
     if last_nearest_pis.full():
         last_nearest_pis.get()
     last_nearest_pis.put(closest_pi)
+    
+    if not last_nearest_pis.full():
+        continue
 
     all_equal = True
     for pi in list(last_nearest_pis.queue):
@@ -78,11 +84,14 @@ for msg in consumer:
         continue
 
     print(closest_pi, data['epoch_time'])
-
-    if closest_pi != last_sent_pi:
-
-        if closest_pi == 'pi_3':
-            sendDealEmail()
+    
+    if closest_pi != last_sent_pi or every_ten >= 10:
+        every_ten = 0
+        
+        if only_once == 0:
+            if closest_pi == 'pi_3':
+                deal_email.sendDealMail()
+                only_once = 1
 
         last_sent_pi = closest_pi
 

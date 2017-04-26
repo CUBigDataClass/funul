@@ -1,10 +1,5 @@
 import smtplib
 from firebase import firebase
-from tabulate import tabulate
-from email.mime.multipart import MIMEMultipart
-import email.mime.text as lig
-from email.mime.text import MIMEText
-import email.MIMEText# import MIMEtext
 
 
 def sendDealMail():
