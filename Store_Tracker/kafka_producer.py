@@ -8,19 +8,20 @@ import time
 SERVERS = ['localhost:9092']
 TOPIC= 'bluetooth_readings' # topic to be used for all trilateration procedures
 ACKS = 0 # don't require any acknowledgements to consider the request complete
-COUCHDB_SERVER = 'http://13.58.9.233:5984'
+COUCHDB_SERVER = 'http://13.58.10.223:5984'
 
 server = couchdb.client.Server(COUCHDB_SERVER)
 server.resource.credentials = ('admin', 'drewmeyers#1')
 db = server['ble']
 producer = KafkaProducer(bootstrap_servers=SERVERS, acks=ACKS)
 
+print('here2')
 for change in db.changes(feed='continuous', since='now'):
     if 'id' not in change:
         continue
-
+    
     doc = db.get(change['id'])
-
+    
     if doc['beacon_id'] != 'rb_nano_1':
         continue
 
