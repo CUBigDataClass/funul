@@ -1,4 +1,0 @@
-andy felong couchdb 2.0 install instructions (http://andyfelong.com/2016/12/couchdb-2-0-on-raspberry-pi/)
-
-Single node setup / cluster setup
-

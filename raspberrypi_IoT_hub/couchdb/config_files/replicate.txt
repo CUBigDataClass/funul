@@ -1,5 +1,0 @@
-POST /_replicate HTTP/1.1
-
-{"source":"ble","target":"http://52.53.196.80:5984/ble", "continuous":true, "create_target":true}
-
-{"source":"ble","target":"http://admin:drewmeyers#1@52.15.234.53:5984/ble", "continuous":true, "create_target":true}
