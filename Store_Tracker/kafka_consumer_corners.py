@@ -12,7 +12,7 @@ from queue import *
 SERVERS = ['localhost:9092'] # kafka server list
 TOPIC = 'bluetooth_readings' # topic to be used for all trilateration procedures
 GROUP_ID = 'blah'
-COUCHDB_SERVER = 'http://13.58.9.233:5984'
+COUCHDB_SERVER = 'http://13.58.10.223:5984'
 
 last_sent_pi = None
 
@@ -37,8 +37,11 @@ db = server['processed_ble']
 
 last_nearest_pis = Queue(maxsize=15)
 
+print('here3')
 consumer = KafkaConsumer(TOPIC, bootstrap_servers=SERVERS, auto_offset_reset='earliest', group_id=GROUP_ID)
+print('here4')
 for msg in consumer:
+    print('here')
     data = json.loads(msg[6].decode('utf-8'))
  
     # only track one beacon
