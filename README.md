@@ -1,5 +1,3 @@
-"If you try to do your best there is no failure" - Mike Farrell
-
 ![Funul.io logo](/Heat_Map/example/static/img/logo_black-01.png)
 
 ATLS 4213 - funul.io (Formerly known as Phat-Stax)
